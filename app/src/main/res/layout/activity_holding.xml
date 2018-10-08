@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80DEEA"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
+        android:id="@+id/circular_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:textSize="30sp"
+        app:direction="clockwise"
+        android:layout_gravity="center"
+        app:progressColor="#FFFFFF"
+        app:progressBackgroundColor="#0097A7"/>
+
+    <android.support.design.bottomappbar.BottomAppBar
+        android:paddingTop="4dp"
+        android:id="@+id/btnAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:backgroundTint="#c1d9ff">
+    </android.support.design.bottomappbar.BottomAppBar>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fap"
+        app:fabSize="normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_pause_black_24dp"
+        app:layout_anchor="@id/btnAppBar"
+        android:backgroundTint="#6dd9f2"
+        app:borderWidth="0dp"
+        android:onClick="stopHolding"/>
+
+</android.support.design.widget.CoordinatorLayout>
