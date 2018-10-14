@@ -7,17 +7,6 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:backgroundTint="#99e5ff">-->
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="?attr/actionBarSize"-->
-    <!--app:navigationIcon="@drawable/ic_menu_black_24dp">-->
-    <!--</android.support.v7.widget.Toolbar>-->
-    <!--</android.support.design.widget.AppBarLayout>-->
-
 
     <android.support.design.bottomappbar.BottomAppBar
         android:id="@+id/btnAppBar"
@@ -25,18 +14,9 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:backgroundTint="#FFFFFF"
-        app:navigationIcon="@drawable/ic_menu_black_24dp"
-        android:paddingTop="7dp"
-        >
+        android:paddingTop="7dp">
 
-        <!--<TextView-->
-            <!--android:layout_width="40dp
-            "-->
-            <!--android:layout_height="40dp"-->
-            <!--android:layout_gravity="right"-->
-            <!--android:drawableRight="@drawable/ic_shopping_cart_black_24dp"-->
-            <!--android:background="#FFFFFF"-->
-            <!--android:layout_marginRight="15dp"/>-->
+        <!--app:navigationIcon="@drawable/ic_menu_black_24dp"-->
 
     </android.support.design.bottomappbar.BottomAppBar>
 
@@ -45,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="#99e5ff"
+        android:backgroundTint="@color/colorPrimaryCyan"
         android:onClick="startHolding"
         android:src="@drawable/ic_play_arrow_black_24dp"
         app:borderWidth="0dp"
@@ -53,5 +33,20 @@
         app:layout_anchor="@id/btnAppBar"
         app:maxImageSize="33dp" />
 
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_menu_black_24dp"
+        android:layout_gravity="bottom|left"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_shopping_cart_black_24dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

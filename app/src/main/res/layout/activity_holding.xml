@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99e5ff">
+    android:background="@color/colorPrimaryCyan">
     <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
         android:id="@+id/circular_progress"
         android:layout_width="240dp"
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
-        android:backgroundTint="#99e5ff"
+        android:backgroundTint="@color/colorPrimaryCyan"
         android:paddingTop="7dp">
     </android.support.design.bottomappbar.BottomAppBar>
 
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="#99e5ff"
+        android:backgroundTint="@color/colorPrimaryCyan"
         android:onClick="stopHolding"
         android:src="@drawable/ic_close_black_24dp"
         app:borderWidth="1.8dp"

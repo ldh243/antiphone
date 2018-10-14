@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_app_bar);
         bottomAppBar = findViewById(R.id.btnAppBar);
-        setSupportActionBar(bottomAppBar);
+//        setSupportActionBar(bottomAppBar);
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,23 +28,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_app_bar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_shopping_cart:
-                Toast.makeText(this, "Shopping cart selected", Toast.LENGTH_SHORT).show();
-                break;
-
-        }
-        return true;
     }
 
     public void startHolding(View view) {
