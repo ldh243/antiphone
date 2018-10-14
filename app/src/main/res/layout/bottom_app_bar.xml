@@ -1,31 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:backgroundTint="#99e5ff">-->
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--app:navigationIcon="@drawable/ic_menu_black_24dp">-->
+    <!--</android.support.v7.widget.Toolbar>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
 
     <android.support.design.bottomappbar.BottomAppBar
-        android:paddingTop="4dp"
         android:id="@+id/btnAppBar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
+        android:backgroundTint="#FFFFFF"
         app:navigationIcon="@drawable/ic_menu_black_24dp"
-        android:backgroundTint="#c1d9ff">
+        android:paddingTop="7dp"
+        >
+
+        <!--<TextView-->
+            <!--android:layout_width="40dp
+            "-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:drawableRight="@drawable/ic_shopping_cart_black_24dp"-->
+            <!--android:background="#FFFFFF"-->
+            <!--android:layout_marginRight="15dp"/>-->
+
     </android.support.design.bottomappbar.BottomAppBar>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fap"
-        app:fabSize="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#99e5ff"
+        android:onClick="startHolding"
         android:src="@drawable/ic_play_arrow_black_24dp"
-        app:layout_anchor="@id/btnAppBar"
-        android:backgroundTint="#6dd9f2"
         app:borderWidth="0dp"
-        android:onClick="startHolding"/>
+        app:fabCustomSize="67dp"
+        app:layout_anchor="@id/btnAppBar"
+        app:maxImageSize="33dp" />
+
 
 </android.support.design.widget.CoordinatorLayout>

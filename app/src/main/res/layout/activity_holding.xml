@@ -1,38 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#80DEEA"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    android:background="#99e5ff">
     <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
         android:id="@+id/circular_progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:textSize="30sp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         app:direction="clockwise"
-        android:layout_gravity="center"
+        app:progressBackgroundColor="#6fa7ba"
         app:progressColor="#FFFFFF"
-        app:progressBackgroundColor="#0097A7"/>
+        app:textSize="0sp"
+        android:layout_gravity="center">
+    </antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator>
+
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/robotoregular"
+        android:layout_marginBottom="110dp"/>
+
+    <TextView
+        android:id="@+id/txtPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#FFFFFF"
+        android:textSize="65sp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/robotoregular"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="points"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/robotoregular"
+        android:layout_marginTop="110dp"/>
 
     <android.support.design.bottomappbar.BottomAppBar
-        android:paddingTop="4dp"
         android:id="@+id/btnAppBar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
-        android:backgroundTint="#c1d9ff">
+        android:backgroundTint="#99e5ff"
+        android:paddingTop="7dp">
     </android.support.design.bottomappbar.BottomAppBar>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fap"
-        app:fabSize="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_pause_black_24dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#99e5ff"
+        android:onClick="stopHolding"
+        android:src="@drawable/ic_close_black_24dp"
+        app:borderWidth="1.8dp"
+        app:fabCustomSize="67dp"
         app:layout_anchor="@id/btnAppBar"
-        android:backgroundTint="#6dd9f2"
-        app:borderWidth="0dp"
-        android:onClick="stopHolding"/>
+        app:maxImageSize="33dp" />
 
 </android.support.design.widget.CoordinatorLayout>

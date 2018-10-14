@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity"
+
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.5"
+        android:gravity="center">
+        <ImageView
+            android:src="@drawable/coffee_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:paddingBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6.5"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        >
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clLoginSection"
+            android:background="@drawable/shape_rounded_border_rec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_marginLeft="54dp"
+                android:id="@+id/txtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:hint="Email Address"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorHint="@color/colorTextSecondary"
+
+                android:drawablePadding="16dp"
+                android:layout_marginRight="54dp"
+
+                />
+
+            <EditText
+                android:id="@+id/etPassword"
+                app:layout_constraintTop_toBottomOf="@+id/txtUsername"
+                android:drawablePadding="16dp"
+                android:layout_marginLeft="54dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:layout_marginRight="54dp"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorHint="@color/colorTextSecondary"
+                />
+            <ImageView
+                app:layout_constraintRight_toLeftOf="@+id/etPassword"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/etPassword"
+                android:paddingTop="7dp"
+                android:src="@drawable/ic_lock_solid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                app:layout_constraintRight_toLeftOf="@id/txtUsername"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txtUsername"
+                android:src="@drawable/ic_envelope_regular"
+                android:paddingTop="7dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/btnLogin"
+            app:layout_constraintTop_toBottomOf="@id/clLoginSection"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@drawable/transformation_rounded_corners"
+            android:text="Login"
+            android:onClick="gotoHome"
+            android:textColor="@color/white"/>
+        <!--<View-->
+        <!--android:layout_width="160dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/btnLoginFacebook"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/btnLogin"-->
+        <!--android:background="@color/colorLine"-->
+        <!--/>-->
+        <!--<com.shaishavgandhi.loginbuttons.FacebookButton-->
+        <!--android:id="@+id/btnLoginFacebook"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/btnLoginGoogle"-->
+        <!--android:text="Sign in with Facebook"-->
+        <!--app:iconSize="30dp"-->
+        <!--app:roundedCorner="true"-->
+        <!--app:roundedCornerRadius="10dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:onClick="gotoHome"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/btnLoginFacebook"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/btnLoginGoogle"-->
+        <!--android:background="@drawable/button_facebook_background"-->
+        <!--android:text="Sign in with Facebook"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:onClick="gotoHome"/>-->
+        <!--<com.shaishavgandhi.loginbuttons.GoogleButton-->
+        <!--android:id="@+id/btnLoginGoogle"-->
+        <!--android:text="Sign in with Google"-->
+        <!--app:iconSize="30dp"-->
+        <!--app:roundedCorner="true"-->
+        <!--app:roundedCornerRadius="10dp"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/tvDontHaveAccount"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:onClick="gotoHome"/>-->
+        <!--<Button-->
+        <!--android:id="@+id/btnLoginGoogle"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/tvDontHaveAccount"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:background="@drawable/button_signup_background"-->
+        <!--android:text="Sign in with Google"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:onClick="gotoHome"-->
+        <!--android:textColor="@color/white"/>-->
+
+        <TextView
+            android:id="@+id/tvDontHaveAccount"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't Have Account?"
+            android:textColor="@color/colorBlueHashtag"/>
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -29,9 +29,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
 
-
     //event bus
     implementation 'org.greenrobot:eventbus:3.1.1'
+    //login button
+    implementation 'com.shaishavgandhi:login-buttons:1.0.0'
 
-
+    //facebook api
+//    implementation'com.squareup.picasso:picasso:2.5.2'
+//    implementation'com.facebook.android:facebook-android-sdk:4.28.0'
 }
