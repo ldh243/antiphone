@@ -17,22 +17,22 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        edtUsername = findViewById(R.id.txtUsername);
-//        edtPassword = findViewById(R.id.txtPassword);
-//        edtUsername.clearFocus();
-//        edtUsername.setOnKeyListener(new View.OnKeyListener() {
-//            @Override 
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                Log.d(TAG, "onKey: " + keyCode);
-//                if (keyCode == KeyEvent.KEYCODE_ENTER) {
-////                    edtPassword.requestFocus();
-//                    Log.d(TAG, "onKey: press enter");;
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        edtUsername = findViewById(R.id.txtUsername);
+        edtPassword = findViewById(R.id.txtPassword);
+        edtUsername.clearFocus();
+        edtUsername.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d(TAG, "onKey: " + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+//                    edtPassword.requestFocus();
+                    Log.d(TAG, "onKey: press enter");;
+                    return true;
+                }
+                return false;
+            }
+        });
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     public void gotoHome(View view) {
