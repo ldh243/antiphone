@@ -37,4 +37,7 @@ dependencies {
     //facebook api
 //    implementation'com.squareup.picasso:picasso:2.5.2'
 //    implementation'com.facebook.android:facebook-android-sdk:4.28.0'
+
+    //draw chart
+    implementation 'com.jjoe64:graphview:4.0.0'
 }

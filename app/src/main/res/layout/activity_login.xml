@@ -17,7 +17,6 @@
         android:layout_weight="3.5"
         android:gravity="center"
         android:paddingTop="20dp">
-
         <ImageView
             android:layout_width="220dp"
             android:layout_height="220dp"
@@ -52,10 +51,14 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/colorTextPrimary"
-                android:textColorHint="@color/colorTextSecondary" />
+                android:textColorHint="@color/colorTextSecondary"
+                android:theme="@style/EditTextTheme"
+                android:maxLines="1"
+                android:maxLength="18"
+                />
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="54dp"
@@ -67,7 +70,11 @@
                 android:paddingBottom="8dp"
                 android:textColor="@color/colorTextPrimary"
                 android:textColorHint="@color/colorTextSecondary"
-                app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
+                app:layout_constraintTop_toBottomOf="@+id/txtUsername"
+                android:theme="@style/EditTextTheme"
+                android:maxLines="1"
+                android:maxLength="18"
+                />
 
             <ImageView
                 android:layout_width="30dp"
@@ -76,8 +83,8 @@
                 android:src="@drawable/ic_lock_black_24dp"
                 app:layout_constraintHorizontal_bias="0.625"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/etPassword"
-                app:layout_constraintTop_toTopOf="@id/etPassword" />
+                app:layout_constraintRight_toLeftOf="@+id/txtPassword"
+                app:layout_constraintTop_toTopOf="@id/txtPassword" />
 
             <ImageView
                 android:layout_width="31dp"
@@ -175,15 +182,15 @@
             app:roundedCorner="true"
             app:roundedCornerRadius="10dp" />
 
-        <TextView
-            android:id="@+id/tvDontHaveAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="Don't Have Account?"
-            android:textColor="@color/colorBlueHashtag"
-            app:layout_constraintTop_toBottomOf="@id/btnLoginGoogle"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+        <!--<TextView-->
+            <!--android:id="@+id/tvDontHaveAccount"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="14dp"-->
+            <!--android:text="Don't Have Account?"-->
+            <!--android:textColor="@color/colorBlueHashtag"-->
+            <!--app:layout_constraintTop_toBottomOf="@id/btnLoginGoogle"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent" />-->
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>
