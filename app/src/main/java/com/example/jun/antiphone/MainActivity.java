@@ -37,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goToProfile(View view) {
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = this.getIntent();
+        Bundle userInfo = intent.getBundleExtra("USERINFO");
+        intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("USERINFO", userInfo);
+
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }

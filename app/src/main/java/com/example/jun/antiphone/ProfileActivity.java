@@ -2,8 +2,11 @@ package com.example.jun.antiphone;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -36,53 +39,40 @@ public class ProfileActivity extends AppCompatActivity {
 //        graph.setTitleColor(Color.BLACK);
 //        graph.setBackgroundColor(Color.CYAN);
 //        graph.setTitle("DAY LA CHART");
-//        graph.getGridLabelRenderer().setGridColor(Color.GRAY);
-//        graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK);
-//        graph.getGridLabelRenderer().setVerticalLabelsColor(Color.BLACK);
 
-        // generate Dates
-        Calendar calendar = Calendar.getInstance();
-        Date d1 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        Date d2 = calendar.getTime();
-        calendar.add(Calendar.DATE, 1);
-        Date d3 = calendar.getTime();
-
-
-
-    // you can directly pass Date objects to DataPoint-Constructor
-    // this will convert the Date to double via Date#getTime()
-        series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(d1, 1),
-                new DataPoint(d2, 5),
-                new DataPoint(d3, 3)
-        });
-
+        graph.getGridLabelRenderer().setGridColor(Color.GRAY);
+        graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK);
+        graph.getGridLabelRenderer().setVerticalLabelsColor(Color.BLACK);
+        graph.getGridLabelRenderer().setVerticalLabelsAlign(Paint.Align.LEFT);
+        graph.getGridLabelRenderer().setVerticalAxisTitle("Time");
+        graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.RED);
+        ProfileUserDAO dao = new ProfileUserDAO();
+        DataPoint [] list = dao.chartHoldingInWeek("123");
+        String [] dayOfWeek = dao.getDayOfWeek();
+        Date[] listDate = dao.get7DaysBefore();
+        series = new LineGraphSeries<>(list);
         graph.addSeries(series);
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
 
-// set date label formatter
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
-        graph.getGridLabelRenderer().setNumHorizontalLabels(3); // only 4 because of the space
-
-// set manual x bounds   to have nice steps
-        graph.getViewport().setMinX(d1.getTime());
-        graph.getViewport().setMaxX(d3.getTime());
+        staticLabelsFormatter.setHorizontalLabels(new String[]{dayOfWeek[0], dayOfWeek[1], dayOfWeek[2], dayOfWeek[3], dayOfWeek[4], dayOfWeek[5], dayOfWeek[6]});
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+        graph.getViewport().setMaxX(listDate[6].getTime()+10000000);
+        graph.getViewport().setMinX(listDate[0].getTime()-10000000);
         graph.getViewport().setXAxisBoundsManual(true);
-
-        // styling
-//        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-//            @Override
-//            public int get(DataPoint data) {
-//                return Color.BLUE;
-//            }
-//        });
+        setTotalTimeHolding();
     }
     private void setTotalTimeHolding() {
         Intent intent = this.getIntent();
         Bundle userInfo = intent.getBundleExtra("USERINFO");
+        Log.d("Tagggggg", "setTotalTimeHolding: " + userInfo);
+
         String userId = (String) userInfo.get("userId");
         ProfileUserDAO dao = new ProfileUserDAO();
         String totalTime = dao.getTotalTimeHolding(userId);
+        TextView txtTotalTime = findViewById(R.id.txtTotalTime);
+        txtTotalTime.setText(totalTime);
 
+
+//        Log.d("Tagggggg", dateStartWeek + " " + dateEndWeek);
     }
 }

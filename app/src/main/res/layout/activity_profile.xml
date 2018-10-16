@@ -5,46 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ProfileActivity">
-    <LinearLayout
+    tools:context=".ProfileActivity"
+    android:padding="16dp">
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph1"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorPrimaryCyan"/>
+
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:text="Total Time Holding"
+        android:textSize="14dp"
+        android:layout_marginTop="43dp"
+        />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtTotalTime"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_margin="16dp"
-        android:background="@color/grey">
+        android:layout_height="wrap_content"
+        android:text="1d 8h 9m"
+        android:gravity="center"
+        android:textSize="35dp"
+        android:layout_marginTop="18dp"
+        android:textColor="@color/colorPrimaryCyan"
+        android:textStyle="bold"
+        />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Total Time Holding"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/txtTotalTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            />
-
-        <com.jjoe64.graphview.GraphView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/graph1"
-            />
-    </LinearLayout>
 
 </LinearLayout>

@@ -36,22 +36,11 @@ public class DateTimeUtils {
         time %= 3600;
 
         int minutes = (int) (time / 60);
-        int seconds = (int) (time % 60);
         StringBuilder sb = new StringBuilder();
-        if (hours > 0) {
-            if (hours < 10) {
-                sb.append(0);
-            }
-            sb.append(hours).append(":");
-        }
-        if (minutes < 10) {
-            sb.append(0);
-        }
-        sb.append(minutes).append(":");
-        if (seconds < 10) {
-            sb.append(0);
-        }
-        sb.append(seconds);
+
+        sb.append(days).append("d ");
+        sb.append(hours).append("h ");
+        sb.append(minutes).append("m ");
         return sb.toString();
     }
 }
