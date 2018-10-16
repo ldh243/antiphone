@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.d(TAG, "onKey: " + keyCode);
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
-//                    edtPassword.requestFocus();
+                    edtPassword.requestFocus();
                     Log.d(TAG, "onKey: press enter");;
                     return true;
                 }
@@ -37,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void gotoHome(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        Bundle userInfo = new Bundle();
+        userInfo.putString("userId", "hoald");
+        intent.putExtra("USERINFO", userInfo);
         startActivity(intent);
     }
 }

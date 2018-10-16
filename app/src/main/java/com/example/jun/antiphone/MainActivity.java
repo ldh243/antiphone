@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_app_bar);
         bottomAppBar = findViewById(R.id.btnAppBar);
-//        setSupportActionBar(bottomAppBar);
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

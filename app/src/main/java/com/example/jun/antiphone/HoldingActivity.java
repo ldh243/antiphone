@@ -17,6 +17,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator;
+import util.DateTimeUtils;
 
 public class HoldingActivity extends AppCompatActivity {
 
@@ -133,32 +134,9 @@ public class HoldingActivity extends AppCompatActivity {
         circularProgress.setCurrentProgress(percent % maxTime);
         txtTime = findViewById(R.id.txtTime);
         txtPoint = findViewById(R.id.txtPoint);
-        txtTime.setText(getTiming(percent));
+        txtTime.setText(DateTimeUtils.generateTime(percent));
         int point = ((int) percent / maxTime) * 20;
         txtPoint.setText(Integer.toString(point));
-    }
-
-    private String getTiming(double time) {
-        int hours = (int) (time / 3600);
-        time %= 3600;
-        int minutes = (int) (time / 60);
-        int seconds = (int) (time % 60);
-        StringBuilder sb = new StringBuilder();
-        if (hours > 0) {
-            if (hours < 10) {
-                sb.append(0);
-            }
-            sb.append(hours).append(":");
-        }
-        if (minutes < 10) {
-            sb.append(0);
-        }
-        sb.append(minutes).append(":");
-        if (seconds < 10) {
-            sb.append(0);
-        }
-        sb.append(seconds);
-        return sb.toString();
     }
 
     public void stopHolding(View view) {
