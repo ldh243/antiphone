@@ -1,5 +1,8 @@
 package util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DateTimeUtils {
     private DateTimeUtils() {
     }
@@ -42,5 +45,11 @@ public class DateTimeUtils {
         sb.append(hours).append("h ");
         sb.append(minutes).append("m ");
         return sb.toString();
+    }
+
+    public static String getDateString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        return formatter.format(date);
     }
 }

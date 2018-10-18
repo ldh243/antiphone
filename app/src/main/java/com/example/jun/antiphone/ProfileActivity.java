@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -45,6 +47,10 @@ public class ProfileActivity extends AppCompatActivity {
         drawChart();
         setTotalTimeHolding();
 
+        mDisplayDate = findViewById(R.id.txtDate);
+        SpannableString date = new SpannableString(DateTimeUtils.getDateString());
+        date.setSpan(new UnderlineSpan(), 0, date.length(), 0);
+        mDisplayDate.setText(date);
 
 
     }
@@ -118,7 +124,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String date = day + "/" +  month + "/" + year;
+                SpannableString date = new SpannableString(day + "/" +  month + "/" + year);
+                date.setSpan(new UnderlineSpan(), 0, date.length(), 0);
                 mDisplayDate.setText(date);
                 drawChart();
             }

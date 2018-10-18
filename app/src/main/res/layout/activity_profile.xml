@@ -9,38 +9,32 @@
     tools:context=".ProfileActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:text="View date: "
-            android:textSize="18dp"
-            />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
         <TextView
             android:id="@+id/txtDate"
             android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:clickable="true"
             android:hint="birthday"
             android:text="14/02/2018"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:layout_gravity="center"/>
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_create_black_24dp"
-            android:onClick="changeDate"
-            />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/ic_launcher_foreground"
+            android:onClick="changeDate"/>
 
     </LinearLayout>
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph1"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginTop="40dp"/>
+        android:layout_height="240dp"/>
 
 
     <TextView
