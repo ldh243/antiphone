@@ -36,7 +36,9 @@ import util.DateTimeUtils;
 
 public class ProfileActivity extends AppCompatActivity {
     LineGraphSeries<DataPoint> series;
-    private TextView mDisplayDate;
+    private int currentYear;
+    private int currentMonth;
+    private int currentDay;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
@@ -44,37 +46,34 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        drawChart();
-        setTotalTimeHolding();
 
-        mDisplayDate = findViewById(R.id.txtDate);
-        SpannableString date = new SpannableString(DateTimeUtils.getDateString());
-        date.setSpan(new UnderlineSpan(), 0, date.length(), 0);
-        mDisplayDate.setText(date);
+        Calendar cal = Calendar.getInstance();
+        currentYear = cal.get(Calendar.YEAR);
+        currentMonth = cal.get(Calendar.MONTH);
+        currentDay = cal.get(Calendar.DAY_OF_MONTH);
+        currentMonth = currentMonth + 1;
+        String currentSelectedDate = currentDay + "/" +  currentMonth + "/" + currentYear;
 
-
-    }
-    private void drawChart() {
+        drawChart(currentSelectedDate);
+        setTotalTimeHolding();    }
+    private void drawChart(String dateString) {
         GraphView graph = findViewById(R.id.graph1);
         graph.getGridLabelRenderer().setGridColor(Color.GRAY);
         graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK);
         graph.getGridLabelRenderer().setVerticalLabelsColor(Color.BLACK);
         graph.getGridLabelRenderer().setVerticalLabelsAlign(Paint.Align.LEFT);
-        graph.getGridLabelRenderer().setVerticalAxisTitle("Time (m)");
+        graph.getGridLabelRenderer().setVerticalAxisTitle("Time(m)");
         graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.BLACK);
         graph.getGridLabelRenderer().setPadding(40);
         ProfileUserDAO dao = new ProfileUserDAO();
 
-        Date date1 = null;
-        TextView txtDate = findViewById(R.id.txtDate);
-
+        Date date = null;
         try {
-        String sDate1 = txtDate.getText().toString();
-            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
         } catch (Exception e){
             e.printStackTrace();
         }
-        Date[] listDay = dao.get7DaysBefore(date1);
+        Date[] listDay = dao.get7DaysBefore(date);
 
         String title = listDay[0].toString().split(" ")[2] + ". "
                 + listDay[0].toString().split(" ")[1] + " - "
@@ -84,7 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
         graph.setTitle(title);
         graph.setTitleColor(Color.BLACK);
         DataPoint [] list = dao.chartHoldingInWeek("123");
-        String [] dayOfWeek = dao.getDayOfWeek(date1);
+        String [] dayOfWeek = dao.getDayOfWeek(date);
         series = new LineGraphSeries<>(list);
         graph.addSeries(series);
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
@@ -108,26 +107,23 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void changeDate(View view) {
-        mDisplayDate = findViewById(R.id.txtDate);
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+
         DatePickerDialog dialog = new DatePickerDialog(
                 ProfileActivity.this,
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,
                 mDateSetListener,
-                year,month,day);
+                currentYear, currentMonth - 1, currentDay);
         dialog.show();
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                SpannableString date = new SpannableString(day + "/" +  month + "/" + year);
-                date.setSpan(new UnderlineSpan(), 0, date.length(), 0);
-                mDisplayDate.setText(date);
-                drawChart();
+                String date = day + "/" +  month + "/" + year;
+                currentYear = year;
+                currentMonth = month;
+                currentDay = day;
+                drawChart(date);
             }
         };
     }

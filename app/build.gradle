@@ -40,4 +40,8 @@ dependencies {
 
     //draw chart
     implementation 'com.jjoe64:graphview:4.0.0'
+
+
+    //circle image view
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

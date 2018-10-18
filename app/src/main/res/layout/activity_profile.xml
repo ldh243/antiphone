@@ -7,34 +7,121 @@
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ProfileActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Your profile"
+            android:gravity="center"/>
+        <View
+            android:layout_width="130dp"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tvText"
+            android:layout_marginLeft="10dp"
+            android:background="@color/black"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="25dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/portrait_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="Kelly Sikkema" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Points earned"
+                android:layout_gravity="center"
+                android:fontFamily="@font/robotoregular"
+                android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/txtPointsEarned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000"
+                android:text="320"
+                android:textSize="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Points spent"
+                android:layout_gravity="center"
+                android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/txtPointsSpent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000"
+                android:text="320"
+                android:textSize="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right">
-        <TextView
-            android:id="@+id/txtDate"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:hint="birthday"
-            android:text="14/02/2018"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textAlignment="center"
-            android:layout_gravity="center_vertical"/>
+        <!--<TextView-->
+        <!--android:id="@+id/txtDate"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:hint="birthday"-->
+        <!--android:text="14/02/2018"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="18dp"-->
+        <!--android:textAlignment="center"-->
+        <!--android:layout_gravity="center_vertical"/>-->
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@mipmap/ic_launcher_foreground"
-            android:onClick="changeDate"/>
-
+            android:onClick="changeDate" />
     </LinearLayout>
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph1"
         android:layout_width="match_parent"
-        android:layout_height="240dp"/>
+        android:layout_height="240dp" />
 
 
     <TextView
