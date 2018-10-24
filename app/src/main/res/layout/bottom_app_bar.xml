@@ -47,6 +47,7 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/ic_store_mall_directory_black_24dp" />
+        android:background="@drawable/ic_store_mall_directory_black_24dp"
+        android:onClick="testFragment"/>
 
 </android.support.design.widget.CoordinatorLayout>

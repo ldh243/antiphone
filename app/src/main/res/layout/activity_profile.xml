@@ -1,61 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ProfileActivity">
-
-    <android.support.design.widget.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabTextColor="@color/black"
-        app:tabSelectedTextColor="@color/grey">
-
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Your profile" />
-
-        <android.support.design.widget.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="history" />
-    </android.support.design.widget.TabLayout>
-    <!--<android.support.design.widget.BottomNavigationView-->
-    <!--android:id="@+id/navigation"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="50dp"-->
-    <!--app:menu="@menu/navigation" >-->
-
-    <!--</android.support.design.widget.BottomNavigationView>-->
+    tools:context=".profile.ProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="150dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="center"-->
-        <!--android:text="Your profile" />-->
-
-        <!--<View-->
-        <!--android:layout_width="130dp"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_toLeftOf="@id/tvText"-->
-        <!--android:background="@color/black" />-->
-        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="wrap_content"

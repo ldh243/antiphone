@@ -6,23 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TestActivity">
+    tools:context=".profile.UserProfileActivity">
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/tab_layout_underline"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabTextColor="@color/black"
-        app:tabIndicatorColor="@color/colorPrimaryCyan"
-        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        app:tabTextColor="@color/grey"
+        app:tabSelectedTextColor="@color/black"
+        app:tabIndicatorColor="#ff3f69"
+        app:tabTextAppearance="@style/TabLayoutStyle"
+        android:outlineSpotShadowColor="@color/grey"
         />
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/viewpager">
-
     </android.support.v4.view.ViewPager>
 
 </LinearLayout>
