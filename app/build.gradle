@@ -27,6 +27,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //circle progress bar
     implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
 
     //event bus
@@ -40,7 +42,6 @@ dependencies {
 
     //draw chart
     implementation 'com.jjoe64:graphview:4.0.0'
-
 
     //circle image view
     implementation 'de.hdodenhof:circleimageview:2.2.0'

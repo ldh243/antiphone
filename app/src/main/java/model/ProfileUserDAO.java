@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import util.DateTimeUtils;
 
@@ -34,14 +35,15 @@ public class ProfileUserDAO {
     }
 
     public DataPoint[] chartHoldingInWeek(String userId){
+
         DataPoint [] list = new DataPoint[]{
-                new DataPoint(1, 3),
-                new DataPoint(2, 1),
-                new DataPoint(3, 7),
-                new DataPoint(4, 11),
-                new DataPoint(5, 18),
-                new DataPoint(6, 4),
-                new DataPoint(7, 0)
+                new DataPoint(1, new Random().nextInt(40)),
+                new DataPoint(2, new Random().nextInt(40)),
+                new DataPoint(3, new Random().nextInt(40)),
+                new DataPoint(4, new Random().nextInt(40)),
+                new DataPoint(5, new Random().nextInt(40)),
+                new DataPoint(6, new Random().nextInt(40)),
+                new DataPoint(7, new Random().nextInt(40))
         };
         return list;
     }

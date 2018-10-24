@@ -42,21 +42,25 @@ public class ProfileActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
+    private void setCurrentDate() {
+        Calendar cal = Calendar.getInstance();
+        currentYear = cal.get(Calendar.YEAR);
+        currentMonth = cal.get(Calendar.MONTH) + 1;
+        currentDay = cal.get(Calendar.DAY_OF_MONTH);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        Calendar cal = Calendar.getInstance();
-        currentYear = cal.get(Calendar.YEAR);
-        currentMonth = cal.get(Calendar.MONTH);
-        currentDay = cal.get(Calendar.DAY_OF_MONTH);
-        currentMonth = currentMonth + 1;
-        String currentSelectedDate = currentDay + "/" +  currentMonth + "/" + currentYear;
-
+        setCurrentDate();
+        String currentSelectedDate = currentDay + "/" + currentMonth + "/" + currentYear;
+        setChangeDateListener();
+        initChart();
         drawChart(currentSelectedDate);
-        setTotalTimeHolding();    }
-    private void drawChart(String dateString) {
+        setTotalTimeHolding();
+    }
+    private void initChart() {
         GraphView graph = findViewById(R.id.graph1);
         graph.getGridLabelRenderer().setGridColor(Color.GRAY);
         graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK);
@@ -65,8 +69,10 @@ public class ProfileActivity extends AppCompatActivity {
         graph.getGridLabelRenderer().setVerticalAxisTitle("Time(m)");
         graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.BLACK);
         graph.getGridLabelRenderer().setPadding(40);
+    }
+    private void drawChart(String dateString) {
+        GraphView graph = findViewById(R.id.graph1);
         ProfileUserDAO dao = new ProfileUserDAO();
-
         Date date = null;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
@@ -85,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
         DataPoint [] list = dao.chartHoldingInWeek("123");
         String [] dayOfWeek = dao.getDayOfWeek(date);
         series = new LineGraphSeries<>(list);
+        graph.removeAllSeries();
         graph.addSeries(series);
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
         staticLabelsFormatter.setHorizontalLabels(dayOfWeek);
@@ -97,24 +104,22 @@ public class ProfileActivity extends AppCompatActivity {
     private void setTotalTimeHolding() {
         Intent intent = this.getIntent();
         Bundle userInfo = intent.getBundleExtra("USERINFO");
-        Log.d("Tagggggg", "setTotalTimeHolding: " + userInfo);
-
         String userId = (String) userInfo.get("userId");
         ProfileUserDAO dao = new ProfileUserDAO();
         String totalTime = dao.getTotalTimeHolding(userId);
         TextView txtTotalTime = findViewById(R.id.txtTotalTime);
         txtTotalTime.setText(totalTime);
     }
-
+    //listener for icon date
     public void changeDate(View view) {
-
         DatePickerDialog dialog = new DatePickerDialog(
                 ProfileActivity.this,
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,
                 mDateSetListener,
-                currentYear, currentMonth - 1, currentDay);
+                currentYear, (currentMonth - 1), currentDay);
         dialog.show();
-
+    }
+    public void setChangeDateListener() {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {

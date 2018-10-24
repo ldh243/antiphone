@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".HoldingActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".FragmentQuiz"></activity>
     </application>
 
 </manifest>
