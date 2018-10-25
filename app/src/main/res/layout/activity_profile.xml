@@ -108,7 +108,7 @@
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp">xxxxxxxxxxx
+            android:layout_marginTop="13dp">
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph1"
                 android:layout_width="match_parent"

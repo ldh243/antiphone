@@ -3,6 +3,7 @@
     package="com.example.jun.antiphone">
 
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -22,7 +23,6 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".profile.ProfileActivity" />
         <activity android:name=".TestActivity" />
-        <activity android:name=".FragmentQuiz" />
         <activity android:name=".profile.UserProfileActivity"></activity>
     </application>
 
