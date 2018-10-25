@@ -108,21 +108,18 @@
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp">
-
+            android:layout_marginTop="13dp">xxxxxxxxxxx
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph1"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                />
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:background="@mipmap/ic_launcher_foreground"
                 android:onClick="changeDate" />
-
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/graph1"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-
-                />
         </android.support.design.widget.CoordinatorLayout>
 
 
@@ -158,7 +155,7 @@
                 android:background="@drawable/ic_trending_up_black_24dp_highlight" />
 
             <ImageView
-                android:layout_width="35dp"
+                    android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_gravity="right|bottom"
                 android:layout_marginRight="24dp"
