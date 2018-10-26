@@ -2,14 +2,21 @@ package com.example.jun.antiphone.profile;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v7.app.AppCompatActivity;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jun.antiphone.R;
@@ -25,13 +32,43 @@ import java.util.Date;
 
 import model.ProfileUserDAO;
 
-public class ProfileActivity extends AppCompatActivity {
+public class FragmentProfile extends Fragment implements View.OnClickListener {
+    View view;
+    GraphView graph;
     LineGraphSeries<DataPoint> series;
     private int currentYear;
     private int currentMonth;
     private int currentDay;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
+    public FragmentProfile() {
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.profile_fragment, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("PERSONALLOG", "onStart: ");
+        setCurrentDate();
+        String currentSelectedDate = currentDay + "/" + currentMonth + "/" + currentYear;
+        setChangeDateListener();
+        initChart();
+        setOnClickListener();
+        drawChart(currentSelectedDate);
+        setTotalTimeHolding();
+    }
+
+    private void setOnClickListener() {
+        ImageView btnChangeDate = getActivity().findViewById(R.id.iconChangeDate);
+        btnChangeDate.setOnClickListener(this);
+    }
 
     private void setCurrentDate() {
         Calendar cal = Calendar.getInstance();
@@ -40,19 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
         currentDay = cal.get(Calendar.DAY_OF_MONTH);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        setCurrentDate();
-        String currentSelectedDate = currentDay + "/" + currentMonth + "/" + currentYear;
-        setChangeDateListener();
-        initChart();
-        drawChart(currentSelectedDate);
-        setTotalTimeHolding();
-    }
     private void initChart() {
-        GraphView graph = findViewById(R.id.graph1);
+        graph = getActivity().findViewById(R.id.graph);
         graph.getGridLabelRenderer().setGridColor(Color.GRAY);
         graph.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK);
         graph.getGridLabelRenderer().setVerticalLabelsColor(Color.BLACK);
@@ -61,13 +87,13 @@ public class ProfileActivity extends AppCompatActivity {
         graph.getGridLabelRenderer().setVerticalAxisTitleColor(Color.BLACK);
         graph.getGridLabelRenderer().setPadding(40);
     }
+
     private void drawChart(String dateString) {
-        GraphView graph = findViewById(R.id.graph1);
         ProfileUserDAO dao = new ProfileUserDAO();
         Date date = null;
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         Date[] listDay = dao.get7DaysBefore(date);
@@ -79,8 +105,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         graph.setTitle(title);
         graph.setTitleColor(Color.BLACK);
-        DataPoint [] list = dao.chartHoldingInWeek("123");
-        String [] dayOfWeek = dao.getDayOfWeek(date);
+        DataPoint[] list = dao.chartHoldingInWeek("123");
+        String[] dayOfWeek = dao.getDayOfWeek(date);
         series = new LineGraphSeries<>(list);
         graph.removeAllSeries();
         graph.addSeries(series);
@@ -93,23 +119,26 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setTotalTimeHolding() {
-        Intent intent = this.getIntent();
+        Intent intent = getActivity().getIntent();
         Bundle userInfo = intent.getBundleExtra("USERINFO");
+        Log.d("PERSONALLOG", "setTotalTimeHolding: " + userInfo);
         String userId = (String) userInfo.get("userId");
         ProfileUserDAO dao = new ProfileUserDAO();
         String totalTime = dao.getTotalTimeHolding(userId);
-        TextView txtTotalTime = findViewById(R.id.txtTotalTime);
+        TextView txtTotalTime = getActivity().findViewById(R.id.txtTotalTime);
         txtTotalTime.setText(totalTime);
     }
-    //listener for icon date
-    public void clickToChangeDate(View view) {
+
+    public void changeDate() {
+        Log.d("PERSONALLOG", "changeDate: ");
         DatePickerDialog dialog = new DatePickerDialog(
-                ProfileActivity.this,
+                getActivity(),
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,
                 mDateSetListener,
                 currentYear, (currentMonth - 1), currentDay);
         dialog.show();
     }
+
     public void setChangeDateListener() {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -122,5 +151,14 @@ public class ProfileActivity extends AppCompatActivity {
                 drawChart(date);
             }
         };
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d("PERSONALLOG", "onClick: " + v.getId());
+        switch (v.getId()) {
+            case R.id.iconChangeDate:
+                changeDate();
+        }
     }
 }

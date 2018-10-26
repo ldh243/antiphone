@@ -23,7 +23,7 @@ public class UserProfileActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentExplorer(), "Your stats");
+        adapter.addFragment(new FragmentProfile(), "Your stats");
         adapter.addFragment(new FragmentQuiz(), "Profile");
 
         viewPager.setAdapter(adapter);
