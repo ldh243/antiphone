@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.jun.antiphone.profile.ProfileActivity;
 import com.example.jun.antiphone.profile.UserProfileActivity;
 
 public class MainActivity extends AppCompatActivity {

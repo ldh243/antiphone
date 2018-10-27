@@ -24,7 +24,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentProfile(), "Your stats");
-        adapter.addFragment(new FragmentQuiz(), "Profile");
+        adapter.addFragment(new FragmentQuiz(), "Edit Profile");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

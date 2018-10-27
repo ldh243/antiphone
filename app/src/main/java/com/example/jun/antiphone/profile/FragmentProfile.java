@@ -120,11 +120,8 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
 
     private void setTotalTimeHolding() {
         Intent intent = getActivity().getIntent();
-        Bundle userInfo = intent.getBundleExtra("USERINFO");
-        Log.d("PERSONALLOG", "setTotalTimeHolding: " + userInfo);
-        String userId = (String) userInfo.get("userId");
         ProfileUserDAO dao = new ProfileUserDAO();
-        String totalTime = dao.getTotalTimeHolding(userId);
+        String totalTime = dao.getTotalTimeHolding("");
         TextView txtTotalTime = getActivity().findViewById(R.id.txtTotalTime);
         txtTotalTime.setText(totalTime);
     }

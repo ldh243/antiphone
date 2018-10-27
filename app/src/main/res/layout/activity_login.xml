@@ -16,11 +16,19 @@
         android:layout_height="192dp"
         android:layout_weight="3.5"
         android:gravity="center"
-        android:paddingTop="20dp">
+        android:paddingTop="20dp"
+        android:orientation="vertical">
         <ImageView
             android:layout_width="220dp"
             android:layout_height="220dp"
             android:src="@drawable/antiphone_logo" />
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
@@ -55,6 +63,7 @@
                 android:theme="@style/EditTextTheme"
                 android:maxLines="1"
                 android:maxLength="18"
+                android:text="ldh243@gmail.com"
                 />
 
             <EditText
@@ -74,6 +83,7 @@
                 android:theme="@style/EditTextTheme"
                 android:maxLines="1"
                 android:maxLength="18"
+                android:text="123123"
                 />
 
             <ImageView
@@ -113,6 +123,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clLoginSection" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"

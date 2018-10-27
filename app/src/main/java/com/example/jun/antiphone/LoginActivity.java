@@ -14,17 +14,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Arrays;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText txtUsername;
     private EditText txtPassword;
     private Button btnLogin;
+    private Button btnLoginFacebook;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+    private CallbackManager mCallbackManager;
+    private String TAG = "PERSONALLOG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +55,56 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         firebaseAuth = FirebaseAuth.getInstance();
-        Log.d("PERSONALLOG", "onCreate: " + firebaseAuth);
-        if (firebaseAuth.getCurrentUser() != null) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
+//        checkRemember();
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
+        btnLoginFacebook = findViewById(R.id.btnLoginFacebook);
+        btnLoginFacebook.setOnClickListener(this);
+
+//
+        // Initialize Facebook Login button
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = findViewById(R.id.login_button);
+        Log.d(TAG, "onCreate: " + loginButton);
+        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+                // ...
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+                Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+
+                // ...
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Pass the activity result back to the Facebook SDK
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void checkRemember() {
+        if (firebaseAuth.getCurrentUser() != null) {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 
     public void gotoHome(View view) {
@@ -61,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
     }
 
-    public void userLogin() {
+    public void checkLogin() {
         String username = txtUsername.getText().toString().trim();
         String password = txtPassword.getText().toString();
         Log.d("PERSONALLOG", "userLogin: " + username + " " + password);
@@ -78,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            finish();
+//                            finish();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else {
                             Toast.makeText(LoginActivity.this, "Registration Error", Toast.LENGTH_SHORT).show();
@@ -90,9 +144,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view == btnLogin) {
-            userLogin();
-        } else {
+            checkLogin();
+        } else if (view == btnLoginFacebook){
+            LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
+            LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                    //handleFacebookAccessToken(loginResult.getAccessToken());
+                }
 
+                @Override
+                public void onCancel() {
+                    Log.d(TAG, "facebook:onCancel");
+                    // ...
+                }
+
+                @Override
+                public void onError(FacebookException error) {
+                    Log.d(TAG, "facebook:onError", error);
+                    // ...
+                }
+            });
         }
     }
 }
