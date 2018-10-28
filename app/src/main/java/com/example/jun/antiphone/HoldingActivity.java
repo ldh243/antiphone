@@ -22,7 +22,10 @@ import util.DateTimeUtils;
 public class HoldingActivity extends AppCompatActivity {
 
     private static final String TAG = "Taggg " + HoldingActivity.class.toString();
-    private static final int maxTime = 3;
+
+    //20 minutes is 1200 seconds
+    private static final int maxTime = 1200;
+    private static final double stepTime = 5;
     CircularProgressIndicator circularProgress;
     BroadcastReceiver screenOnOffReceiver;
     double currentProgress;
@@ -109,7 +112,7 @@ public class HoldingActivity extends AppCompatActivity {
                 public void run() {
                     while (true) {
                         if (allowRun) {
-                            currentProgress += 0.1;
+                            currentProgress += stepTime;
                             if (currentProgress >= 0) {
                                 EventBus.getDefault().post(new ChangeUIEvent(currentProgress, point));
                             }
@@ -141,7 +144,6 @@ public class HoldingActivity extends AppCompatActivity {
 
     public void stopHolding(View view) {
         finish();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     public class ChangeUIEvent {
@@ -222,7 +224,7 @@ public class HoldingActivity extends AppCompatActivity {
     }
 
     private void resetClock() {
-        currentProgress = 0;
+        currentProgress = -1;
     }
 
     private void enableClock() {

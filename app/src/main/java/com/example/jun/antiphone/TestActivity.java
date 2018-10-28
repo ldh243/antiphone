@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.jun.antiphone.profile.FragmentEditProfile;
+
 public class TestActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
@@ -19,7 +21,7 @@ public class TestActivity extends AppCompatActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentExplorer(), "Your stats");
-        adapter.addFragment(new FragmentQuiz(), "Profile");
+        adapter.addFragment(new FragmentEditProfile(), "Profile");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

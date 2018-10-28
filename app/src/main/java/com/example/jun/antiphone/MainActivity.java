@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HoldingActivity.class);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 startActivity(intent);
             }
         });
@@ -34,15 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goToProfile(View view) {
-        Intent intent = this.getIntent();
-        Bundle userInfo = intent.getBundleExtra("USERINFO");
-        intent = new Intent(this, UserProfileActivity.class);
-        intent.putExtra("USERINFO", userInfo);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        Intent intent= new Intent(this, UserProfileActivity.class);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         startActivity(intent);
     }
 
     public void testFragment(View view) {
+        finish();
         Intent intent = new Intent(this, UserProfileActivity.class);
         startActivity(intent);
     }

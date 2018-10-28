@@ -8,173 +8,115 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".login_logout.SignupActivity"
-    >
+    tools:context=".login_logout.SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5"
+        android:layout_weight="3.5"
+        android:background="@color/colorPrimaryCyan"
         android:gravity="center"
-        android:paddingTop="20dp"
-        android:orientation="vertical">
-        <!--<ImageView-->
-            <!--android:layout_width="220dp"-->
-            <!--android:layout_height="220dp"-->
-            <!--android:src="@drawable/antiphone_logo" />-->
-        <TextView
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:gravity="center"
-            android:text="SIGN UP"/>
+            android:layout_height="0dp"
+            android:src="@drawable/antiphone_logo2"
+            android:layout_weight="8"
+            />
     </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_weight="7.5"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_weight="6.5"
         android:foregroundGravity="center"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:weightSum="10"
+        >
+        <EditText
+            android:id="@+id/txtEmailSignup"
+            android:layout_width="268dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:drawablePadding="16dp"
+            android:hint="Email"
+            android:inputType="text"
+            android:lineHeight="40dp"
+            android:maxLines="1"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHint="@color/colorTextSecondary"
+            android:theme="@style/EditTextTheme" />
 
 
-        <LinearLayout
-            android:id="@+id/emailField"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <EditText
-                android:id="@+id/txtEmailSignup"
-                android:layout_width="268dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:drawablePadding="16dp"
-                android:hint="Email"
-                android:inputType="text"
-                android:lineHeight="40dp"
-                android:maxLines="1"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/colorTextPrimary"
-                android:textColorHint="@color/colorTextSecondary"
-                android:theme="@style/EditTextTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/txtNameSignup"
+            android:layout_width="268dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="16dp"
+            android:hint="Name"
+            android:inputType="text"
+            android:lineHeight="40dp"
+            android:maxLines="1"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHint="@color/colorTextSecondary"
+            android:theme="@style/EditTextTheme" />
 
 
-        </LinearLayout>
+        <EditText
+            android:id="@+id/txtPasswordSignup"
+            android:layout_width="268dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="16dp"
+            android:hint="Password"
 
-        <LinearLayout
-            android:id="@+id/nameField"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailField"
-            android:layout_marginTop="10dp">
+            android:inputType="text"
+            android:lineHeight="40dp"
+            android:maxLines="1"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHint="@color/colorTextSecondary"
+            android:theme="@style/EditTextTheme" />
 
 
-            <EditText
-                android:id="@+id/txtNameSignup"
-                android:layout_width="268dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:drawablePadding="16dp"
-                android:hint="Name"
-                android:inputType="text"
-                android:lineHeight="40dp"
-                android:maxLines="1"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/colorTextPrimary"
-                android:textColorHint="@color/colorTextSecondary"
-                android:theme="@style/EditTextTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </LinearLayout>
+        <EditText
+            android:id="@+id/txtPasswordConfirmSignup"
+            android:layout_width="268dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="16dp"
+            android:hint="Confirm Password"
+            android:inputType="text"
+            android:lineHeight="40dp"
+            android:maxLines="1"
+            android:textColor="@color/colorTextPrimary"
+            android:textColorHint="@color/colorTextSecondary"
+            android:theme="@style/EditTextTheme" />
 
-        <LinearLayout
-            android:id="@+id/passwordField"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameField"
-            android:layout_marginTop="10dp">
-
-            <EditText
-                android:id="@+id/txtPasswordSignup"
-                android:layout_width="268dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:drawablePadding="16dp"
-                android:hint="Password"
-                android:inputType="text"
-                android:lineHeight="40dp"
-                android:maxLines="1"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/colorTextPrimary"
-                android:textColorHint="@color/colorTextSecondary"
-                android:theme="@style/EditTextTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/passwordConfirmField"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordField"
-            android:layout_marginTop="10dp">
-
-            <EditText
-                android:id="@+id/txtPasswordConfirmSignup"
-                android:layout_width="268dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:drawablePadding="16dp"
-                android:hint="Confirm Password"
-                android:inputType="text"
-                android:lineHeight="40dp"
-                android:maxLines="1"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textColor="@color/colorTextPrimary"
-                android:textColorHint="@color/colorTextSecondary"
-                android:theme="@style/EditTextTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnSignupSignup"
+            android:layout_width="268dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_go"
+            android:text="Sign up"
+            android:textColor="@color/white" />
 
         <RelativeLayout
             android:id="@+id/seperateSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="12dp"
-            app:layout_constraintBottom_toTopOf="@id/btnLogin">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/tvText"
@@ -182,59 +124,40 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp"
                 android:text="ALREADY HAVE AN ACCOUNT"
                 android:textColor="@color/grey"
-                android:textSize="11dp"/>
+                android:textSize="11dp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
                 android:layout_toLeftOf="@id/tvText"
-                android:background="@color/grey"
-                />
+                android:background="@color/grey" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="16dp"
                 android:layout_toRightOf="@id/tvText"
-                android:background="@color/grey"
-                />
+                android:background="@color/grey" />
 
         </RelativeLayout>
 
         <Button
-            android:id="@+id/btnSignin"
+            android:id="@+id/btnLoginSignup"
             android:layout_width="268dp"
             android:layout_height="48dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginRight="56dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_go"
-            android:text="Sign up"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/seperateSignup"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="268dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginRight="56dp"
-            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_go"
             android:text="Login"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:textColor="@color/white" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
 </LinearLayout>

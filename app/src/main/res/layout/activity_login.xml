@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:weightSum="10"
@@ -12,46 +11,52 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_weight="3.5"
+        android:layout_height="0dp"
+        android:layout_weight="4.5"
+        android:background="@color/colorPrimaryCyan"
         android:gravity="center"
-        android:paddingTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="10">
+
         <ImageView
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:src="@drawable/antiphone_logo" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/antiphone_logo2"
+            android:layout_weight="8"
+            />
     </LinearLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6.5"
+        android:layout_weight="5.5"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
         android:paddingBottom="16dp"
-        android:layout_marginTop="0dp">
+        >
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:id="@+id/clLoginSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/shape_rounded_border_rec"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            >
 
             <EditText
                 android:id="@+id/txtEmailSignin"
                 android:layout_width="268dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="50dp"
                 android:drawablePadding="16dp"
                 android:hint="Email"
                 android:inputType="text"
                 android:maxLines="1"
+                android:textSize="18sp"
                 android:lineHeight="40dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -60,17 +65,16 @@
                 android:textColor="@color/colorTextPrimary"
                 android:textColorHint="@color/colorTextSecondary"
                 android:theme="@style/EditTextTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_gravity="center"
+                />
 
             <EditText
                 android:id="@+id/txtPasswordSignin"
                 android:layout_width="268dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="50dp"
                 android:drawablePadding="16dp"
                 android:hint="Password"
+                android:textSize="18sp"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:paddingTop="8dp"
@@ -80,30 +84,10 @@
                 android:textColor="@color/colorTextPrimary"
                 android:textColorHint="@color/colorTextSecondary"
                 android:theme="@style/EditTextTheme"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmailSignin" />
-
-            <!--<ImageView-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="34dp"-->
-            <!--android:paddingTop="7dp"-->
-            <!--android:src="@drawable/ic_vpn_key_black_24dp"-->
-            <!--app:layout_constraintHorizontal_bias="0.625"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toLeftOf="@+id/txtPassword"-->
-            <!--app:layout_constraintTop_toTopOf="@id/txtPassword" />-->
-
-            <!--<ImageView-->
-            <!--android:layout_width="31dp"-->
-            <!--android:layout_height="34dp"-->
-            <!--android:paddingTop="7dp"-->
-            <!--android:src="@drawable/ic_email_black_24dp"-->
-            <!--app:layout_constraintHorizontal_bias="0.64"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toLeftOf="@id/txtUsername"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
-        </android.support.constraint.ConstraintLayout>
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                />
+        </LinearLayout>
 
 
         <Button
@@ -117,17 +101,12 @@
             android:onClick="gotoHome"
             android:text="GO !"
             android:textColor="@color/white"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clLoginSection" />
+            />
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin"
             android:layout_marginTop="12dp">
 
             <TextView
@@ -159,6 +138,12 @@
                 />
 
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
 
         <com.shaishavgandhi.loginbuttons.FacebookButton
             android:id="@+id/btnLoginFacebook"
@@ -169,38 +154,34 @@
             android:textColor="@color/white"
             android:textSize="13dp"
             app:iconSize="25dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:roundedCorner="true"
             app:roundedCornerRadius="35dp"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="56dp"/>
+            />
 
         <com.shaishavgandhi.loginbuttons.GoogleButton
             android:id="@+id/btnLoginGoogle"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="60dp"
             android:onClick="gotoHome"
             android:text="GOOGLE"
             android:textSize="13dp"
             app:iconSize="25dp"
-            app:layout_constraintStart_toEndOf="@+id/btnLoginFacebook"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin"
             app:roundedCorner="true"
-            app:roundedCornerRadius="35dp" />
+            app:roundedCornerRadius="35dp"
+            android:layout_marginLeft="13dp"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvDontHaveAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:layout_gravity="center"
             android:textSize="15dp"
             android:text="Don't have an account?"
             android:textColor="@color/colorBlueHashtag"
             app:layout_constraintTop_toBottomOf="@id/btnLoginGoogle"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </LinearLayout>
