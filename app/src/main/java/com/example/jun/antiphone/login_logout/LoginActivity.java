@@ -1,6 +1,7 @@
 package com.example.jun.antiphone.login_logout;
 
 import android.app.ProgressDialog;
+import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jun.antiphone.MainActivity;
 import com.example.jun.antiphone.R;
 import com.facebook.AccessToken;
@@ -23,6 +30,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -30,8 +39,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
+
+import util.MapUtils;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private int TEST_MODE = 1;
@@ -45,10 +59,54 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView createAccount;
     private String TAG = "PERSONALLOG";
 
+//    public void callApi() {
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//
+//        String URL = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=10.7994789,106.6114475" +
+//                "&destinations=10.8538493,106.6261721&key=AIzaSyBsY-26loYcr2kpIARp5wTmbExsf-BWC7M";
+//
+//
+//        JsonObjectRequest objectRequest = new JsonObjectRequest(
+//                Request.Method.GET,
+//                URL,
+//                null,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//                            String json = response.toString();
+//                            ObjectMapper om = new ObjectMapper();
+//                            JsonNode jsonNode = om.readTree(json);
+//                            Log.d(TAG, "onResponse: " + jsonNode.get("rows").get(0).get("elements").get(0).get("distance").get("text"));
+////                            String distance = jsonNode.get("rows").get("elements").get("distance").get("text").asText();
+////                            Log.d(TAG, "onResponseeeeeeeeeeeeeeeee: " + distance);
+//
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                            Log.d(TAG, "onResponse: " + ex.getMessage());
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.d(TAG, "onErrorResponse: " + error.toString());
+//                    }
+//                }
+//        );
+//        requestQueue.add(objectRequest);
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        try {
+            Log.d(TAG, "onCreate: " + MapUtils.getDistance());
+        } catch (Exception ex) {
+            Log.d(TAG, "onCreate exception: " + ex.toString());
+        }
+
         progressDialog = new ProgressDialog(this);
         txtUsername = findViewById(R.id.txtEmailSignin);
         txtPassword = findViewById(R.id.txtPasswordSignin);

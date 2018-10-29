@@ -23,4 +23,13 @@
     <color name="signup">#FF5353</color>
     <color name="search">#FAFAFA</color>
     <color name="next">#795548</color>
+
+
+    <color name="colorPrimaryText">#000000</color>
+    <color name="colorSecondaryText">#737373</color>
+    <color name="colorIcons">#FFFFFF</color>
+    <color name="colorDivider">#737373</color>
+    <color name="colorMap">#FAE6D6</color>
+
+
 </resources>

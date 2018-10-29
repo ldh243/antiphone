@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jun.antiphone"
-    >
+    package="com.example.jun.antiphone">
 
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,13 +17,14 @@
         <activity android:name=".login_logout.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".HoldingActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".profile.UserProfileActivity" />
-        <activity android:name=".login_logout.SignupActivity"/>
+        <activity android:name=".login_logout.SignupActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -45,6 +46,22 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <!-- <activity -->
+        <!-- android:name=".MapsActivity" -->
+        <!-- android:label="@string/title_activity_maps"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity android:name=".MapActivity"></activity>
     </application>
 
 </manifest>

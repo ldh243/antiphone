@@ -6,4 +6,11 @@
     <string name="title_notifications">Notifications</string>
     <string name="facebook_app_id">308993303020954</string>
     <string name="fb_login_protocol_scheme">fb308993303020954</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="route_distance">Distance</string>
+    <string name="route_distance_value">40.2 Km</string>
+    <string name="route_duration">Duration</string>
+    <string name="route_duration_value">48 mins</string>
+    <string name="server_error">Server error. Something when wrong with the server</string>
 </resources>
