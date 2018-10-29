@@ -49,4 +49,7 @@
     <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="NoAnimTheme" parent="android:Theme">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
 </resources>

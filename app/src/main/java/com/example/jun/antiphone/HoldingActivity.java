@@ -63,6 +63,7 @@ public class HoldingActivity extends AppCompatActivity {
             Log.d(TAG, "onStart:  should not keep running, stop the app");
             resetClock();
             finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
 
 //        isStop = false;
@@ -144,6 +145,7 @@ public class HoldingActivity extends AppCompatActivity {
 
     public void stopHolding(View view) {
         finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     public class ChangeUIEvent {

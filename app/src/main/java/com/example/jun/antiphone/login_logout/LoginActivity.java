@@ -34,6 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private int TEST_MODE = 1;
     private EditText txtUsername;
     private EditText txtPassword;
     private Button btnLogin;
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CallbackManager callbackManager;
     private TextView createAccount;
     private String TAG = "PERSONALLOG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void gotoHome(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        updateUI();
     }
 
     public void checkLogin() {
@@ -118,7 +119,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             checkLogin();
         }
 
-        if (view == btnLoginFacebook){
+        if (view == btnLoginFacebook) {
+            if (TEST_MODE == 1) {
+                updateUI();
+            }
             callbackManager = CallbackManager.Factory.create();
             LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
             LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -142,12 +146,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d(TAG, "facebook:onError", exception);
                     Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
 
-               }
+                }
             });
         }
 
         if (view == createAccount) {
             startActivity(new Intent(this, SignupActivity.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
@@ -179,5 +184,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
         finish();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

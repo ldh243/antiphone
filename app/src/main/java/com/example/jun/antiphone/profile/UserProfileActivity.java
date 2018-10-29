@@ -41,6 +41,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         if (v == fapProfile) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 }

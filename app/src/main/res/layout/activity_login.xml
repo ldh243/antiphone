@@ -103,7 +103,6 @@
             android:textColor="@color/white"
             />
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -156,6 +155,7 @@
             app:iconSize="25dp"
             app:roundedCorner="true"
             app:roundedCornerRadius="35dp"
+            android:layout_margin="5dp"
             />
 
         <com.shaishavgandhi.loginbuttons.GoogleButton
@@ -168,7 +168,9 @@
             app:iconSize="25dp"
             app:roundedCorner="true"
             app:roundedCornerRadius="35dp"
-            android:layout_marginLeft="13dp"/>
+            android:layout_marginLeft="13dp"
+            android:layout_margin="5dp"
+            />
         </LinearLayout>
 
         <TextView

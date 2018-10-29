@@ -30,10 +30,12 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (v == btnLogin) {
             finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
 
         if (v == btnSignup) {
             finish();
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 }

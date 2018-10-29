@@ -17,14 +17,13 @@
         <activity android:name=".login_logout.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".HoldingActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".profile.UserProfileActivity" />
-        <activity android:name=".login_logout.SignupActivity"></activity>
+        <activity android:name=".login_logout.SignupActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

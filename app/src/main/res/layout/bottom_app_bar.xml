@@ -130,7 +130,7 @@
         android:layout_gravity="bottom|left"
         android:layout_marginLeft="40dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/ic_trending_up_black_24dp"
+        android:background="@drawable/ic_person_grey_24dp"
         android:onClick="goToProfile" />
 
     <ImageView
@@ -139,7 +139,7 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/ic_store_mall_directory_black_24dp"
+        android:background="@drawable/ic_shopping_basket_grey_24dp"
         android:onClick="testFragment" />
 
 </android.support.design.widget.CoordinatorLayout>

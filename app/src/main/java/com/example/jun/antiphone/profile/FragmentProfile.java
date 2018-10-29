@@ -48,7 +48,6 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.profile_fragment, container, false);
-
         return view;
     }
 
@@ -119,7 +118,6 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     }
 
     private void setTotalTimeHolding() {
-        Intent intent = getActivity().getIntent();
         ProfileUserDAO dao = new ProfileUserDAO();
         String totalTime = dao.getTotalTimeHolding("");
         TextView txtTotalTime = getActivity().findViewById(R.id.txtTotalTime);
