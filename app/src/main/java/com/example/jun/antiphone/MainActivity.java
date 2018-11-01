@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.jun.antiphone.cart.CartActivity;
 import com.example.jun.antiphone.profile.UserProfileActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     public void testFragment(View view) {
         finish();
         Intent intent = new Intent(this, UserProfileActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+    public void goToCart(View view) {
+        Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }

@@ -9,7 +9,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:src="@drawable/portrait_1" />
+        android:src="@drawable/avatar_kelly" />
 
     <LinearLayout
         android:layout_width="360dp"

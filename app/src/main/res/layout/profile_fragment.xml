@@ -22,7 +22,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/portrait_1" />
+                android:src="@drawable/avatar_kelly" />
 
             <TextView
                 android:layout_width="wrap_content"

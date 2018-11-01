@@ -23,7 +23,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:src="@drawable/antiphone_logo2"
+            android:src="@drawable/logo_antiphone"
             android:layout_weight="8"
             />
     </LinearLayout>

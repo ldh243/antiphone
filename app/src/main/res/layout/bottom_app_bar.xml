@@ -105,7 +105,10 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:backgroundTint="#00000000"
-        android:paddingTop="7dp">
+        android:paddingTop="7dp"
+        android:background="@drawable/background_holding"
+        >
+
 
         <!--app:navigationIcon="@drawable/ic_menu_black_24dp"-->
 
@@ -129,7 +132,7 @@
         android:layout_height="35dp"
         android:layout_gravity="bottom|left"
         android:layout_marginLeft="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/ic_person_grey_24dp"
         android:onClick="goToProfile" />
 
@@ -138,8 +141,8 @@
         android:layout_height="35dp"
         android:layout_gravity="bottom|right"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/ic_shopping_basket_grey_24dp"
-        android:onClick="testFragment" />
+        android:onClick="goToCart" />
 
 </android.support.design.widget.CoordinatorLayout>
