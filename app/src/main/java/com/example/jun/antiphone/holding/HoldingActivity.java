@@ -1,38 +1,45 @@
-package com.example.jun.antiphone;
+package com.example.jun.antiphone.holding;
 
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.jun.antiphone.R;
+import com.example.jun.antiphone.singleton.RestfulAPIManager;
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator;
+import entity.ActivitiesLogDTO;
 import util.DateTimeUtils;
+import util.PointUtils;
 
 public class HoldingActivity extends AppCompatActivity {
 
     private static final String TAG = "Taggg " + HoldingActivity.class.toString();
 
     //20 minutes is 1200 seconds
-    private static final int maxTime = 1200;
-    private static final double stepTime = 5;
+    private static final int MAX_TIME = 1200;
+    private static final int STEP_TIME = 5;
     CircularProgressIndicator circularProgress;
     BroadcastReceiver screenOnOffReceiver;
-    double currentProgress;
+    long currentProgress;
     boolean allowRun;
     boolean clockIsRunning = false;
     TextView txtTime;
     TextView txtPoint;
-    int point;
+    long point;
 
     boolean shouldKeepRunning = true;
 
@@ -102,14 +109,14 @@ public class HoldingActivity extends AppCompatActivity {
             clockIsRunning = true;
             enableClock();
             circularProgress = findViewById(R.id.circular_progress);
-            circularProgress.setMaxProgress(maxTime);
+            circularProgress.setMaxProgress(MAX_TIME);
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     while (true) {
                         if (allowRun) {
-                            currentProgress += stepTime;
+                            currentProgress += STEP_TIME;
                             if (currentProgress >= 0) {
                                 EventBus.getDefault().post(new ChangeUIEvent(currentProgress, point));
                             }
@@ -130,13 +137,13 @@ public class HoldingActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onChangeUI(ChangeUIEvent event) {
-        double percent = event.getPercent();
-        circularProgress.setCurrentProgress(percent % maxTime);
+        long seconds = event.getSeconds();
+        circularProgress.setCurrentProgress(seconds % MAX_TIME);
         txtTime = findViewById(R.id.txtTime);
         txtPoint = findViewById(R.id.txtPoint);
-        txtTime.setText(DateTimeUtils.generateTime(percent));
-        int point = ((int) percent / maxTime) * 20;
-        txtPoint.setText(Integer.toString(point));
+        txtTime.setText(DateTimeUtils.generateTime(seconds));
+        long point = PointUtils.calculatePoint(seconds);
+        txtPoint.setText(Long.toString(point));
     }
 
     public void stopHolding(View view) {
@@ -144,20 +151,20 @@ public class HoldingActivity extends AppCompatActivity {
     }
 
     public class ChangeUIEvent {
-        private double percent;
-        private int point;
+        private long seconds;
+        private long point;
 
-        public ChangeUIEvent(double percent, int point) {
-            this.percent = percent;
+        public ChangeUIEvent(long percent, long point) {
+            this.seconds = percent;
             this.point = point;
         }
 
-        public int getPoint() {
+        public long getPoint() {
             return point;
         }
 
-        public double getPercent() {
-            return percent;
+        public long getSeconds() {
+            return seconds;
         }
     }
 
@@ -210,9 +217,29 @@ public class HoldingActivity extends AppCompatActivity {
     }
 
     private void stopAndSave() {
+        disableClock();
         Log.d(TAG, String.format("stopAndSave: currentProgress=%s", currentProgress));
-        
-        finish();
+
+        long point = PointUtils.calculatePoint(currentProgress);
+
+        // post current point to api
+
+        ActivitiesLogDTO activitiesLogDTO = new ActivitiesLogDTO();
+        activitiesLogDTO.setActivitiesLogDate(DateTimeUtils.getDateString());
+        activitiesLogDTO.setActivitiesLogAchievedTime(currentProgress);
+        Log.d(TAG, String.format("stopAndSave: pointReceived=%s", point));
+        activitiesLogDTO.setActivitiesLogPointReceived(point);
+        activitiesLogDTO.setUsername(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+        RestfulAPIManager.getInstancẹ̣̣̣().postActivityLog(this,activitiesLogDTO);
+
+
+        //show dialogFragment
+        //todo set custom text here
+        DialogFragment dialogFragment = HoldingPointDialogFragment.create("Ouch! You can do better !", currentProgress, point);
+        dialogFragment.show(this.getSupportFragmentManager(), TAG);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//        finish();
     }
 }

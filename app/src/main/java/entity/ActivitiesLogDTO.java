@@ -11,7 +11,7 @@ public class ActivitiesLogDTO implements Serializable {
 
     private Long activitiesLogID;
 
-    private Instant activitiesLogDate;
+    private String activitiesLogDate;
 
     private Long activitiesLogPointReceived;
 
@@ -28,11 +28,11 @@ public class ActivitiesLogDTO implements Serializable {
         this.activitiesLogID = activitiesLogID;
     }
 
-    public Instant getActivitiesLogDate() {
+    public String getActivitiesLogDate() {
         return activitiesLogDate;
     }
 
-    public void setActivitiesLogDate(Instant activitiesLogDate) {
+    public void setActivitiesLogDate(String activitiesLogDate) {
         this.activitiesLogDate = activitiesLogDate;
     }
 

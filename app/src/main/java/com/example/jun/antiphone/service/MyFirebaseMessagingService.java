@@ -2,7 +2,7 @@ package com.example.jun.antiphone.service;
 
 import android.util.Log;
 
-import com.example.jun.antiphone.utils.MyNotificationManager;
+import com.example.jun.antiphone.singleton.MyNotificationManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

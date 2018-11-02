@@ -48,6 +48,12 @@ public class DateTimeUtils {
     }
 
     public static String getDateString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        return formatter.format(date);
+    }
+
+    public static String getDateTimeString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         return formatter.format(date);

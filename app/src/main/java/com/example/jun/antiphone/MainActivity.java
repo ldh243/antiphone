@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.jun.antiphone.cart.CartActivity;
+import com.example.jun.antiphone.holding.HoldingActivity;
 import com.example.jun.antiphone.profile.UserProfileActivity;
 
 public class MainActivity extends AppCompatActivity {
