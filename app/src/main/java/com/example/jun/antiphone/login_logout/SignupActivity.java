@@ -13,11 +13,24 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jun.antiphone.R;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONObject;
+
+import entity.UserDTO;
+import util.Constants;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,6 +39,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     EditText edtEmail;
     EditText edtPassword;
     EditText edtConfirmPassword;
+    EditText edttName;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private String TAG = "PERSONALLOG";
@@ -46,6 +60,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         edtEmail = findViewById(R.id.edtEmailSignup);
         edtPassword = findViewById(R.id.edtPasswordSignup);
         edtConfirmPassword = findViewById(R.id.edtPasswordConfirmSignup);
+        edttName = findViewById(R.id.edtEmailSignup);
     }
 
 
@@ -62,9 +77,11 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        String email = edtEmail.getText().toString().trim();
+        final String email = edtEmail.getText().toString().trim();
         String password = edtPassword.getText().toString();
         String passwordConfirm = edtConfirmPassword.getText().toString();
+        final String name = edttName.getText().toString();
+
         Log.d(TAG, "registerUser: " + email);
         Log.d(TAG, "registerUser: " + password);
         Log.d(TAG, "registerUser: " + passwordConfirm);
@@ -95,6 +112,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
+                            UserDTO dto = new UserDTO();
+                            dto.setEmail(task.getResult().getUser().getEmail());
+                            dto.setFirstName(task.getResult().getUser().getDisplayName());
+                            dto.setUsername(task.getResult().getUser().getUid());
                             Toast.makeText(SignupActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                             finish();
                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -106,5 +127,48 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                     }
 
                 });
+    }
+    public void apiRegisterWithoutPassword(UserDTO dto) {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        String URL = Constants.API_PATH + "/api/users/register-without-password";
+
+        Log.d(TAG, "apiRegisterWithoutPassword: " + dto.getUsername());
+        Log.d(TAG, "apiRegisterWithoutPassword: " + dto.getEmail());
+        Log.d(TAG, "apiRegisterWithoutPassword: " + dto.getFirstName());
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", dto.getUsername());
+            jsonObject.put("firstName", dto.getFirstName());
+            jsonObject.put("email", dto.getEmail());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                URL,
+                jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String json = response.toString();
+                            Log.d(TAG, "onResponse: " + json);
+                            ObjectMapper om = new ObjectMapper();
+                            JsonNode jsonNode = om.readTree(json);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            Log.d(TAG, "onResponse: " + ex.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error.toString());
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
     }
 }

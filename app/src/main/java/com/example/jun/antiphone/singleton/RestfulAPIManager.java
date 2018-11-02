@@ -75,11 +75,6 @@ public class RestfulAPIManager {
                                 Log.d(TAG, String.format("postActivityLog: onResponse: failded to| %s", activitiesLogDTO));
 
                             }
-
-
-//                            String distance = jsonNode.get("rows").get("elements").get("distance").get("text").asText();
-//                            Log.d(TAG, "onResponseeeeeeeeeeeeeeeee: " + distance);
-
                         } catch (Exception ex) {
                             ex.printStackTrace();
                             Log.d(TAG, "onResponse: " + ex.getMessage());
