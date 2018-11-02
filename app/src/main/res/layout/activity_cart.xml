@@ -9,31 +9,40 @@
     android:orientation="vertical">
 
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabLayoutCart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tab_layout_underline"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        android:outlineSpotShadowColor="@color/grey"
-        app:tabIndicatorColor="#ff3f69"
-        app:tabSelectedTextColor="@color/black"
-        app:tabTextAppearance="@style/TabLayoutStyle"
-        app:tabTextColor="@color/grey"
-        />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPagerCart"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="46dp"
-        android:padding="2dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         >
 
-    </android.support.v4.view.ViewPager>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayoutCart"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/tab_layout_underline"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            android:outlineSpotShadowColor="@color/grey"
+            app:tabIndicatorColor="#ff3f69"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextAppearance="@style/TabLayoutStyle"
+            app:tabTextColor="@color/grey"
+
+            />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginBottom="50dp"
+            >
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
+
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

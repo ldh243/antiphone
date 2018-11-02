@@ -7,8 +7,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.jun.antiphone.MainActivity;
 import com.example.jun.antiphone.R;
@@ -22,6 +24,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager viewPager;
     private ImageView imgvProfile;
     private FloatingActionButton fabHolding;
+
+    private static String[] tabNames = {"FOOD", "DRINK", "SHOPPING"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +42,23 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new FragmentDrink(), "FOOD");
-        adapter.addFragment(new FragmentFood(), "DRINK");
-        adapter.addFragment(new FragmentFood(), "SHOPPING");
+        adapter.addFragment(new FragmentDrink(), tabNames[0]);
+        adapter.addFragment(new FragmentFood(), tabNames[1]);
+        adapter.addFragment(new FragmentFood(), tabNames[2]);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
 
-//        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-//            tabLayout.getTabAt(i).setIcon(R.drawable.cutlery);
-//        }
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setIcon(R.drawable.ic_cutlery);
+            TextView tabView = (TextView) LayoutInflater.from(this).inflate(R.layout.item_custom_tab_layout, null);
+            tabView.setText(tabNames[i]);
+            tabView.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_cutlery,0,0);
+            tab.setCustomView(tabView);
+
+
+        }
     }
 
     @Override

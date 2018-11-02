@@ -36,6 +36,8 @@ public class HoldingActivity extends AppCompatActivity {
 
     boolean shouldKeepRunning = true;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +62,12 @@ public class HoldingActivity extends AppCompatActivity {
         } else {
             // should not keep running, stop the app
             Log.d(TAG, "onStart:  should not keep running, stop the app");
+            stopAndSave();
+
+            //maybe dont need to reset because the activity finish here
             resetClock();
-            finish();
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//            finish();
+//            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }
 
@@ -205,6 +210,8 @@ public class HoldingActivity extends AppCompatActivity {
     }
 
     private void stopAndSave() {
+        Log.d(TAG, String.format("stopAndSave: currentProgress=%s", currentProgress));
+        
         finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
