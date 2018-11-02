@@ -41,13 +41,6 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         startActivity(intent);
     }
-
-    public void testFragment(View view) {
-        finish();
-        Intent intent = new Intent(this, UserProfileActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-    }
     public void goToCart(View view) {
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);

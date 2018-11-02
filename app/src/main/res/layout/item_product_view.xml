@@ -48,7 +48,9 @@
                 android:layout_marginLeft="50dp"
                 android:background="#f45642"
                 android:gravity="center"
-                android:text="-50%" />
+                android:text="-50%"
+                android:textColor="@color/white"
+                />
 
 
         </LinearLayout>

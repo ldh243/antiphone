@@ -8,15 +8,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.jun.antiphone.MainActivity;
 import com.example.jun.antiphone.R;
 import com.example.jun.antiphone.ViewPagerAdapter;
+import com.example.jun.antiphone.cart.CartActivity;
 
 public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private ImageView imgvShopping;
+
     private FloatingActionButton fapProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
         fapProfile = findViewById(R.id.fapProfile);
         fapProfile.setOnClickListener(this);
+
+        imgvShopping = findViewById(R.id.imgvGoToCart_Profile);
+        imgvShopping.setOnClickListener(this);
     }
 
     @Override
@@ -41,6 +48,12 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         if (v == fapProfile) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        }
+
+        if (v == imgvShopping) {
+            finish();
+            startActivity(new Intent(this, CartActivity.class));
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
     }

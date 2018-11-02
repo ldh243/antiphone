@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_cart"
     android:layout_width="match_parent"
@@ -7,26 +8,19 @@
     android:background="#FFFF"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:elevation="0dp"
-        android:id="@+id/appBarId">
-    </android.support.design.widget.AppBarLayout>
+
     <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayoutCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabLayoutCart"
         android:background="@drawable/tab_layout_underline"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabTextColor="@color/grey"
-        app:tabSelectedTextColor="@color/black"
-        app:tabIndicatorColor="#ff3f69"
-        app:tabTextAppearance="@style/TabLayoutStyle"
         android:outlineSpotShadowColor="@color/grey"
-
+        app:tabIndicatorColor="#ff3f69"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@style/TabLayoutStyle"
+        app:tabTextColor="@color/grey"
         />
 
     <android.support.v4.view.ViewPager
@@ -34,7 +28,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="46dp"
+        android:padding="2dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         >
+
     </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.CoordinatorLayout
@@ -45,15 +43,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            android:paddingTop="7dp"
-            android:backgroundTintMode="add"
-            android:backgroundTint="#FFF8F8F6"
-            >
-
+            android:backgroundTint="#FFFFFF"
+            android:paddingTop="7dp">
         </android.support.design.bottomappbar.BottomAppBar>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fapProfile"
+            android:id="@+id/fapCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -65,6 +60,7 @@
             app:maxImageSize="33dp" />
 
         <ImageView
+            android:id="@+id/imgvGoToProfile_Cart"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="@drawable/ic_person_grey_24dp"

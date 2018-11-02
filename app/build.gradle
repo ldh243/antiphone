@@ -52,7 +52,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.1'
 
-    //login with facebook
+    //google auth
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+
+    //facebook auth
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.facebook.android:facebook-login:[4,5)'
 
@@ -70,6 +73,7 @@ dependencies {
             [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.5'],
             [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5']
     )
+
     //recycle view
     implementation 'com.android.support:recyclerview-v7:28.0.0-alpha3'
 

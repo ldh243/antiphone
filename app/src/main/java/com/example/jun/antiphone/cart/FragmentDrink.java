@@ -30,8 +30,12 @@ public class FragmentDrink extends Fragment {
         view = inflater.inflate(R.layout.list_item_recycleview, container, false);
 
         posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
-//        posts1.add(new PostDTO(2, R.drawable.post_image01, "FOOD2" ,"DO UONG 2", 20));
-//        posts1.add(new PostDTO(3, R.drawable.post_image01, "FOOD3" ,"DO UONG 3", 50));
+        posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
+        posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
+        posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
+        posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
+        posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
+        posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
 
         RecyclerDataAdapter adapter = new RecyclerDataAdapter(view.getContext(), posts1);
         rvItems1 = view.findViewById(R.id.rv_items);

@@ -64,14 +64,6 @@ public class HoldingActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
-
-//        isStop = false;
-//        if (isStartAgain) {
-        //user pressed system menu
-//            finish();
-//            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//        }
-//        isStartAgain = true;
     }
 
     @Override
@@ -143,8 +135,7 @@ public class HoldingActivity extends AppCompatActivity {
     }
 
     public void stopHolding(View view) {
-        finish();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        stopAndSave();
     }
 
     public class ChangeUIEvent {
@@ -179,7 +170,6 @@ public class HoldingActivity extends AppCompatActivity {
                 String strAction = intent.getAction();
                 if (strAction.equals(Intent.ACTION_SCREEN_OFF)) {
                     ActivityManager am = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
-// The first in the list of RunningTasks is always the foreground task.
                     ActivityManager.RunningTaskInfo foregroundTaskInfo = am.getRunningTasks(1).get(0);
 
                     if (foregroundTaskInfo.topActivity.getClassName().equals(HoldingActivity.class.getName())) {
@@ -194,34 +184,11 @@ public class HoldingActivity extends AppCompatActivity {
                         Log.d(TAG, String.format("onReceive:user is not opening our application,stop the clock, foregroundtaskinfo=%s", foregroundTaskInfo.topActivity.getClassName()));
                         shouldKeepRunning = false;
                     }
-
-
-//                Log.d(TAG, "onReceive: isStop = " + isStop);
-
-                    //todo hoa's code
-
-//                    if (isStop) return;
-//                String strAction = intent.getAction();
-//                if (strAction.equals(Intent.ACTION_SCREEN_OFF)) {
-//                    startClock();
-////                    Log.d(TAG, "onReceive: Screen off");
-//                    isStartAgain = false;
-//                }
                 }
 
             }
         };
         getApplicationContext().registerReceiver(screenOnOffReceiver, theFilter);
-
-
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-            Log.d(TAG, "onKeyDown: MENU BUTTON");
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     private void resetClock() {
@@ -235,5 +202,10 @@ public class HoldingActivity extends AppCompatActivity {
     private void disableClock() {
         allowRun = false;
         clockIsRunning = false;
+    }
+
+    private void stopAndSave() {
+        finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }
