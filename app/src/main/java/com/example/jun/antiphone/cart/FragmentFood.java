@@ -28,7 +28,7 @@ public class FragmentFood extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.food_fragment, container, false);
+        view = inflater.inflate(R.layout.list_item_recycleview, container, false);
         posts = new ArrayList<>();
         posts.add(new PostDTO(1, R.drawable.post_image01, "FOOD1" ,"MON AN 1", 0));
         posts.add(new PostDTO(2, R.drawable.post_image01, "FOOD2" ,"MON AN 2", 20));

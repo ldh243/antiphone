@@ -27,9 +27,9 @@ public class FragmentDrink extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.food_fragment, container, false);
+        view = inflater.inflate(R.layout.list_item_recycleview, container, false);
 
-        posts1.add(new PostDTO(1, R.drawable.avatar_kelly, "FOOD1" ,"DO UONG 1", 0));
+        posts1.add(new PostDTO(1, R.drawable.passio_coffee_sale, "FOOD1" ,"Passio Coffee", 0));
 //        posts1.add(new PostDTO(2, R.drawable.post_image01, "FOOD2" ,"DO UONG 2", 20));
 //        posts1.add(new PostDTO(3, R.drawable.post_image01, "FOOD3" ,"DO UONG 3", 50));
 

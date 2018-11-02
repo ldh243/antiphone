@@ -29,7 +29,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
     @Override
     public DataViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View itemView;
-        itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.post_item, viewGroup, false);
+        itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_product_view, viewGroup, false);
         return new DataViewHolder(itemView);
     }
 
@@ -76,8 +76,8 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
         public DataViewHolder(final View itemView) {
             super(itemView);
 //            ic_sale = itemView.findViewById(R.id.post_sale);
-            postTitle = itemView.findViewById(R.id.post_title);
-            post_image = itemView.findViewById(R.id.post_image);
+            postTitle = itemView.findViewById(R.id.tvPostTitle);
+            post_image = itemView.findViewById(R.id.imgvPostImage);
             itemView.setOnClickListener(this);
         }
 
