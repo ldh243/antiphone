@@ -19,18 +19,29 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jun.antiphone.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import model.ProfileUserDAO;
+import util.Constants;
+import util.DateTimeUtils;
 
 public class FragmentProfile extends Fragment implements View.OnClickListener {
     View view;
@@ -39,6 +50,10 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     private int currentYear;
     private int currentMonth;
     private int currentDay;
+    private TextView txtPointEarned;
+    private TextView txtPointSpent;
+    private TextView txtTotalTimeHolding;
+
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     public FragmentProfile() {
@@ -62,6 +77,12 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
         setOnClickListener();
         drawChart(currentSelectedDate);
         setTotalTimeHolding();
+        txtPointEarned = getActivity().findViewById(R.id.txtPointsEarned);
+        txtPointSpent = getActivity().findViewById(R.id.txtPointsSpent);
+        txtTotalTimeHolding = getActivity().findViewById(R.id.txtTotalTime);
+        getTotalPointEarned();
+        getTotalPointSpent();
+        getTotalTimeHolding();
     }
 
     private void setOnClickListener() {
@@ -156,4 +177,156 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
                 changeDate();
         }
     }
+
+    public void getTotalTimeHolding() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getCurrentUser().getUid();
+
+        String URL = Constants.API_PATH + "/api/activities-logs/users/total-time";
+        URL += "/" + uid;
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+//                            String json = response.toString();
+//                            ObjectMapper om = new ObjectMapper();
+//                            JsonNode jsonNode = om.readTree(json);
+//                            Log.d(TAG, "onResponse: " + jsonNode.get("rows").get(0).get("elements").get(0).get("distance").get("text"));
+//                            String distance = jsonNode.get("rows").get("elements").get("distance").get("text").asText();
+//                            Log.d(TAG, "onResponseeeeeeeeeeeeeeeee: " + distance);
+                            String pointEarned = response.get("data").toString();
+
+                            Double totalTime = Double.parseDouble(pointEarned);
+                            txtTotalTimeHolding.setText(DateTimeUtils.generateDayHourMinutes(totalTime));
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
+
+    public void getTotalPointSpent() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getCurrentUser().getUid();
+
+        String URL = Constants.API_PATH + "/api/point-logs/users/total-point";
+        URL += "/" + uid;
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String pointEarned = response.get("data").toString();
+                            txtPointSpent.setText(pointEarned);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
+
+    public void getTotalPointEarned() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getCurrentUser().getUid();
+
+        String URL = Constants.API_PATH + "/api/activities-logs/users/total-point";
+        URL += "/" + uid;
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+//                            String json = response.toString();
+//                            ObjectMapper om = new ObjectMapper();
+//                            JsonNode jsonNode = om.readTree(json);
+//                            Log.d(TAG, "onResponse: " + jsonNode.get("rows").get(0).get("elements").get(0).get("distance").get("text"));
+//                            String distance = jsonNode.get("rows").get("elements").get("distance").get("text").asText();
+//                            Log.d(TAG, "onResponseeeeeeeeeeeeeeeee: " + distance);
+                            String pointEarned = response.get("data").toString();
+                            txtPointEarned.setText(pointEarned);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
+    //    public void callApi() {
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//
+//        String URL = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=10.7994789,106.6114475" +
+//                "&destinations=10.8538493,106.6261721&key=AIzaSyBsY-26loYcr2kpIARp5wTmbExsf-BWC7M";
+//
+//
+//        JsonObjectRequest objectRequest = new JsonObjectRequest(
+//                Request.Method.GET,
+//                URL,
+//                null,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//                            String json = response.toString();
+//                            ObjectMapper om = new ObjectMapper();
+//                            JsonNode jsonNode = om.readTree(json);
+//                            Log.d(TAG, "onResponse: " + jsonNode.get("rows").get(0).get("elements").get(0).get("distance").get("text"));
+////                            String distance = jsonNode.get("rows").get("elements").get("distance").get("text").asText();
+////                            Log.d(TAG, "onResponseeeeeeeeeeeeeeeee: " + distance);
+//
+//                        } catch (Exception ex) {
+//                            ex.printStackTrace();
+//                            Log.d(TAG, "onResponse: " + ex.getMessage());
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.d(TAG, "onErrorResponse: " + error.toString());
+//                    }
+//                }
+//        );
+//        requestQueue.add(objectRequest);
+//    }
+
 }
+

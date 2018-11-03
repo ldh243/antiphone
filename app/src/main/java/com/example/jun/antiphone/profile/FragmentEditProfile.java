@@ -59,7 +59,13 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
     }
 
     public void getCurrentUserInformation() {
-        userInfo = RestfulAPIManager.getInstancẹ̣̣̣().getUserInformation(getContext(), "");
+//        UserDTO dto = new UserDTO();
+        userInfo.setFirstName("Lê Minh Dui");
+        userInfo.setPhone(Long.parseLong("761233666"));
+        userInfo.setDob("1997-04-30");
+        userInfo.setLocation("Wakanda");
+        userInfo.setGender("Female");
+//        userInfo = RestfulAPIManager.getInstancẹ̣̣̣().getUserInformation(getContext(), "");
     }
 
     @Override
