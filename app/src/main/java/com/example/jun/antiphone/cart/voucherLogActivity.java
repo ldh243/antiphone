@@ -25,7 +25,7 @@ public class voucherLogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_voucher_log);
 
         //get user point
-        TextView userPoint = findViewById(R.id.userPoint);
+//        TextView userPoint = findViewById(R.id.userPoint);
 
 
         //Lấy list voucher Log --> đổ vào recyclerVoucherLogAdapter

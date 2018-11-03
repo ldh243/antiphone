@@ -53,6 +53,22 @@ public class DateTimeUtils {
         return formatter.format(date);
     }
 
+    public static Date parseStringToDate(String date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = null;
+        try {
+            date1 = formatter.parse(date);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return date1;
+    }
+
+    public static String parseDateToString(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(date);
+    }
+
     public static String getDateTimeString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();

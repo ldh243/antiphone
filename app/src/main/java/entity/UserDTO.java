@@ -24,6 +24,12 @@ public class UserDTO {
 
     private Long phone;
 
+    private String location;
+
+    private String gender;
+
+    private String dob;
+
     private String imageUrl;
 
     private boolean activated = false;
@@ -193,5 +199,29 @@ public class UserDTO {
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
             '}';
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }
