@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><!--<LinearLayout--><!--xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="50dp"--><!--android:orientation="vertical">--><!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="35dp"--><!--android:orientation="horizontal"--><!--android:weightSum="10"--><!--android:layout_marginLeft="10dp"--><!--android:layout_marginRight="10dp"--><!--android:layout_marginTop="5dp"--><!--&gt;--><!--<TextView--><!--android:gravity="center"--><!--android:id="@+id/STT"--><!--android:layout_weight="1"--><!--android:layout_width="0dp"--><!--android:layout_height="match_parent" />--><!--<TextView--><!--android:gravity="center"--><!--android:id="@+id/PostName"--><!--android:layout_weight="2.5"--><!--android:layout_width="0dp"--><!--android:layout_height="match_parent" />--><!--<TextView--><!--android:gravity="center"--><!--android:id="@+id/Date"--><!--android:layout_weight="2.5"--><!--android:layout_width="0dp"--><!--android:layout_height="match_parent" />--><!--<TextView--><!--android:gravity="center"--><!--android:id="@+id/voucherNumber"--><!--android:layout_weight="3"--><!--android:layout_width="0dp"--><!--android:layout_height="match_parent" />--><!--<TextView--><!--android:gravity="center"--><!--android:id="@+id/voucherPointRequired"--><!--android:layout_weight="2"--><!--android:layout_width="0dp"--><!--android:layout_height="match_parent" />--><!--</LinearLayout>-->
+
+<!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="1dp"--><!--android:background="#000"/>-->
+
+<!--</LinearLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/postItems"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:background="#FFF"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="30dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="12dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/avatar_kelly"/>
+            <TextView
+                android:id="@+id/postTitle"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="12dp"
+                android:text="First post history"
+                android:textSize="15dp" />
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:background="#f45642"
+                android:gravity="center"
+                android:text="-50%"
+                android:textColor="#FFFF" />
+        </LinearLayout>
+        <ImageView
+            android:background="@drawable/background_post_detail02"
+            android:id="@+id/imgvPostImage"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="12dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:text="PASSIO - Giảm giá 50% sản phẩm Latte đá"
+            android:textSize="17dp" />
+        <LinearLayout
+            android:background="#d7d7d7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:padding="6dp">
+            <LinearLayout
+                android:weightSum="10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="5"
+                    android:text="Mã voucher"
+                    android:textSize="12dp"
+                    android:layout_margin="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:gravity="right"
+                    android:id="@+id/voucherNumber"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Ngày lấy mã:"
+                    android:textSize="12dp" />
+                <TextView
+                    android:gravity="right"
+                    android:id="@+id/voucherDate"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

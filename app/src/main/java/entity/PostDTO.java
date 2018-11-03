@@ -109,6 +109,9 @@ public class PostDTO {
         this.remainNumber = remainNumber;
     }
 
+    public PostDTO() {
+    }
+
     public PostDTO(int postID, String name, int discountRate) {
         this.postID = postID;
         this.name = name;
