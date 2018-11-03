@@ -1,7 +1,7 @@
 package util;
 
 public class Constants {
-    public static final String API_PATH = "http://d7043447.ngrok.io";
+    public static final String API_PATH = "http://08f25495.ngrok.io";
 
     //notification
     public static final String FIREBASE_TOPIC_NAME = "StayFocused";

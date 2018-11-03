@@ -20,6 +20,15 @@ public class StoreDTO implements Serializable {
 
     private StoreGroupDTO storeGroup;
 
+    private String distanceToCurrentPos;
+
+    public String getDistanceToCurrentPos() {
+        return distanceToCurrentPos;
+    }
+
+    public void setDistanceToCurrentPos(String distanceToCurrentPos) {
+        this.distanceToCurrentPos = distanceToCurrentPos;
+    }
 
     public Long getStoreID() {
         return storeID;

@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.ActivitiesLogDTO;
@@ -124,6 +125,51 @@ public class RestfulAPIManager {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, String.format("postActivityLog: onResponse: failded to| %s", error));
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
+
+    public void getStoreDistance(Context context, String origins, String destination, final VolleyCallback callback) {
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        String URL = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origins +
+                "&destinations=" + destination +"&key=AIzaSyBsY-26loYcr2kpIARp5wTmbExsf-BWC7M";
+
+                JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray rows = response.getJSONArray("rows");
+                            JSONObject row = (JSONObject) rows.get(0);
+                            JSONArray elements = row.getJSONArray("elements");
+
+                            List<String> distances = new ArrayList<>();
+
+                            for (int i = 0; i < elements.length(); i++) {
+
+                                JSONObject element = (JSONObject) elements.get(i);
+                                JSONObject distance = (JSONObject) element.get("distance");
+                                distances.add(distance.getString("text"));
+                            }
+
+                            callback.onSuccess(distances);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            Log.d(TAG, "onResponse: " + ex.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(TAG, "onErrorResponse: " + error.toString());
                     }
                 }
         );

@@ -1,11 +1,16 @@
 package com.example.jun.antiphone;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,85 +21,73 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import entity.StoreDTO;
 
 public class StoreGroupLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private final static long LOCATION_REFRESH_TIME = 1000 * 60 * 10;
+    private final static long LOCATION_REFRESH_DISTANCE = 100000000;
     private SupportMapFragment mapFragment;
     private ProgressDialog myProgress;
     private ListView lvStores;
     private GoogleMap gmap;
-    private StoreDTO[] stores;
+    private List<StoreDTO> stores;
+
+    private final LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+//            getStores(location);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_group_location);
 
-        // Tạo Progress Bar
         myProgress = new ProgressDialog(this);
         myProgress.setTitle("Map Loading ...");
         myProgress.setMessage("Please wait...");
         myProgress.setCancelable(true);
-
-        // Hiển thị Progress Bar
         myProgress.show();
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.gmap);
         mapFragment.getMapAsync(this);
 
         lvStores = findViewById(R.id.lvStores);
-
-        RestfulAPIManager api = RestfulAPIManager.getInstancẹ̣̣̣();
-
-        api.getStoresInStoreGroup(this, 2, new VolleyCallback() {
-
-            @Override
-            public void onSuccess(JSONArray arrays) {
-
-                if (arrays.length() > 0) {
-
-                    ObjectMapper mapper = new ObjectMapper();
-                    stores = new StoreDTO[arrays.length()];
-
-                    for (int i = 0; i < stores.length; i++) {
-                        try {
-                            StoreDTO store = mapper.readValue(arrays.get(i).toString(), StoreDTO.class);
-                            setMarker(new LatLng(Double.parseDouble(store.getStoreLatitude()),
-                                    Double.parseDouble(store.getStoreLongitude())));
-
-                            stores[i] = store;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    ArrayAdapter<StoreDTO> arrayAdapter
-                            = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, stores);
-
-                    lvStores.setAdapter(arrayAdapter);
-                }
-            }
-        });
-
         lvStores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LatLng location = new LatLng(
-                        Double.parseDouble(stores[position].getStoreLatitude()),
-                        Double.parseDouble(stores[position].getStoreLongitude()));
-                setMap(location);
+                setMap(new LatLng(
+                        Double.parseDouble(stores.get(position).getStoreLatitude()),
+                        Double.parseDouble(stores.get(position).getStoreLongitude())));
             }
 
         });
-
     }
 
     @Override
@@ -112,19 +105,97 @@ public class StoreGroupLocationActivity extends AppCompatActivity implements OnM
                 myProgress.dismiss();
             }
         });
+
+        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Not permission
+        }
+
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
+                LOCATION_REFRESH_DISTANCE, mLocationListener);
+
+        Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        setMap(new LatLng(location.getLatitude(), location.getLongitude()));
+        setMarker(new LatLng(location.getLatitude(), location.getLongitude()), "My location", true);
+        getStores(location);
     }
 
-    private void setMarker(LatLng location) {
-        MarkerOptions markerOptions = new MarkerOptions().position(location);
+    private void setMarker(LatLng location, String title, boolean isMyLocation) {
+        MarkerOptions markerOptions = new MarkerOptions().position(location)
+                .title(title);
+        markerOptions.icon(
+                isMyLocation ? BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                : BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         gmap.addMarker(markerOptions);
     }
 
     private void setMap(LatLng location) {
-        CameraPosition INIT = new CameraPosition.Builder().target(location).zoom(15.5F).bearing(300F) // orientation
-                .tilt(50F) // viewing angle
+        CameraPosition INIT = new CameraPosition.Builder().target(location).zoom(15.5F).bearing(300F)
+                .tilt(50F)
                 .build();
         gmap.moveCamera(CameraUpdateFactory.newCameraPosition(INIT));
 
+    }
+
+    private void getStores(Location location) {
+
+        final RestfulAPIManager api = RestfulAPIManager.getInstancẹ̣̣̣();
+
+        final String origin = location.getLatitude() + "," + location.getLongitude();
+
+
+        api.getStoresInStoreGroup(this, 2, new VolleyCallback() {
+
+            @Override
+            public void onSuccess(Object response) {
+
+                JSONArray arrays = (JSONArray) response;
+
+                if (arrays.length() > 0) {
+
+                    stores = new ArrayList<>();
+
+                    ObjectMapper mapper = new ObjectMapper();
+                    String destination = "";
+
+                    for (int i = 0; i < arrays.length(); i++) {
+                        try {
+                            final StoreDTO store = mapper.readValue(arrays.get(i).toString(), StoreDTO.class);
+                            destination += store.getStoreLatitude() + "," + store.getStoreLongitude() + "|";
+                            setMarker(new LatLng(Double.parseDouble(store.getStoreLatitude()),
+                                    Double.parseDouble(store.getStoreLongitude())), store.getStoreAddress(), false);
+                            stores.add(store);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    destination = destination.substring(0, destination.length() - 1);
+
+                    api.getStoreDistance(getApplicationContext(), origin, destination, new VolleyCallback() {
+                        @Override
+                        public void onSuccess(Object response) {
+                            List<String> distances = (List<String>) response;
+                            for (int i = 0; i < distances.size(); i++) {
+                                stores.get(i).setDistanceToCurrentPos(distances.get(i));
+                            }
+
+                            CustomerStoreAdapter arrayAdapter = new CustomerStoreAdapter(
+                                    StoreGroupLocationActivity.this,
+                                    R.layout.store_row_item,
+                                    stores);
+
+                            lvStores.setAdapter(arrayAdapter);
+                        }
+                    });
+
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "No stores", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }
 
