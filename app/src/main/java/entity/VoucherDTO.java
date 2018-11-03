@@ -1,62 +1,81 @@
 package entity;
 
-public class VoucherDTO {
-    private int id;
-    private boolean status;
-    private int point;
-    private String codeNumber;
-    private int postID;
+import java.io.Serializable;
+import java.util.Objects;
 
-    public int getId() {
-        return id;
+public class VoucherDTO implements Serializable {
+
+    private Long voucherID;
+
+    private String voucherNumber;
+
+    private Boolean voucherStatus;
+
+    private Long voucherPointRequired;
+
+    private PostDTO post;
+
+    public Long getVoucherID() {
+        return voucherID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setVoucherID(Long voucherID) {
+        this.voucherID = voucherID;
     }
 
-    public boolean isStatus() {
-        return status;
+    public String getVoucherNumber() {
+        return voucherNumber;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setVoucherNumber(String voucherNumber) {
+        this.voucherNumber = voucherNumber;
     }
 
-    public int getPoint() {
-        return point;
+    public Boolean isVoucherStatus() {
+        return voucherStatus;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
+    public void setVoucherStatus(Boolean voucherStatus) {
+        this.voucherStatus = voucherStatus;
     }
 
-
-    public String getCodeNumber() {
-        return codeNumber;
+    public Long getVoucherPointRequired() {
+        return voucherPointRequired;
     }
 
-    public void setCodeNumber(String codeNumber) {
-        this.codeNumber = codeNumber;
+    public void setVoucherPointRequired(Long voucherPointRequired) {
+        this.voucherPointRequired = voucherPointRequired;
     }
 
-    public int getPostID() {
-        return postID;
+    public PostDTO getPost() {
+        return post;
     }
 
-    public void setPostID(int postID) {
-        this.postID = postID;
+    public void setPost(PostDTO post) {
+        this.post = post;
     }
 
-    public VoucherDTO( ) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VoucherDTO that = (VoucherDTO) o;
+        return Objects.equals(voucherID, that.voucherID);
     }
 
-    public VoucherDTO(int id, boolean status, int point, String codeNumber, int postID) {
+    @Override
+    public int hashCode() {
+        return Objects.hash(voucherID);
+    }
 
-        this.id = id;
-        this.status = status;
-        this.point = point;
-        this.codeNumber = codeNumber;
-        this.postID = postID;
+    @Override
+    public String toString() {
+        return "VoucherDTO{" +
+                "voucherID=" + voucherID +
+                ", voucherNumber='" + voucherNumber + '\'' +
+                ", voucherStatus=" + voucherStatus +
+                ", voucherPointRequired=" + voucherPointRequired +
+                ", post=" + post +
+                '}';
     }
 }

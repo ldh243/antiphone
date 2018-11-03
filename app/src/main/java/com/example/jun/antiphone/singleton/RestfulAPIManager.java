@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import entity.ActivitiesLogDTO;
+import entity.UserDTO;
 import util.Constants;
 
 public class RestfulAPIManager {
@@ -35,6 +36,17 @@ public class RestfulAPIManager {
         }
         return mInstance;
     }
+
+    public UserDTO getUserInformation(Context context, String user) {
+        UserDTO dto = new UserDTO();
+        dto.setFirstName("Lê Minh Dui");
+        dto.setPhone(Long.parseLong("761233666"));
+        dto.setDob("1997-04-30");
+        dto.setLocation("Wakanda");
+        dto.setGender("Female");
+        return dto;
+    }
+
 
     public void postActivityLog(Context context, final ActivitiesLogDTO activitiesLogDTO) {
         Log.d(TAG, String.format("postActivityLog: %s", activitiesLogDTO));
@@ -91,6 +103,51 @@ public class RestfulAPIManager {
         );
         requestQueue.add(objectRequest);
     }
+
+    public void getActivityLogNearby(Context context, String userId, String date) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        String URL = Constants.API_PATH + "/api/activities-logs/near-date";
+
+        URL += "?user=" + userId;
+        URL += "&date=" + date;
+
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String json = response.toString();
+                            ObjectMapper om = new ObjectMapper();
+                            JsonNode jsonNode = om.readTree(json);
+                            int status = jsonNode.get("status").asInt();
+                            if (status == 200) {
+                                //success
+                                
+                            } else {
+                                // failed
+
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            Log.d(TAG, "onResponse: " + ex.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
+
 
 //    public void callApi() {
 //        RequestQueue requestQueue = Volley.newRequestQueue(this);

@@ -25,8 +25,6 @@ public class MyApplication extends Application {
 
         // register to notification topic
         registerToFirebaseTopic(Constants.FIREBASE_TOPIC_NAME);
-
-
         createNotificationChannel();
     }
 

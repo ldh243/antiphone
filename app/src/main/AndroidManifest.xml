@@ -29,6 +29,7 @@
         <activity android:name=".login_logout.SignupActivity" />
         <activity android:name=".cart.CartActivity" />
         <activity android:name=".cart.PostDetailActivity" />
+        <activity android:name=".cart.voucherLogActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

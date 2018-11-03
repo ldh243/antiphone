@@ -40,7 +40,7 @@ public class RecyclerVoucherLogAdapter extends RecyclerView.Adapter<RecyclerVouc
 
         // ĐỔ dữ lịu cứng
         VoucherDTO dto1 = new VoucherDTO();
-        dto1.setCodeNumber("BKJHFKJNKJ");
+        dto1.setVoucherNumber("BKJHFKJNKJ");
 
         PostDTO dto2 = new PostDTO();
         dto2.setTitle("POST TITLE DEMO");
@@ -48,7 +48,7 @@ public class RecyclerVoucherLogAdapter extends RecyclerView.Adapter<RecyclerVouc
 
         holder.date.setText(dto.getDate());
         holder.postTitle.setText("" + dto2.getTitle());
-        holder.voucherNumber.setText("" + dto1.getCodeNumber());
+        holder.voucherNumber.setText("" + dto1.getVoucherNumber());
 
         //Khi click -> show detail nếu muốn
 //        holder.setItemClickListener(new ItemClickListener() {
