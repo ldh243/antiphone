@@ -32,16 +32,13 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Name"
-            android:textColor="#686868"
             android:textSize="16sp" />
 
         <EditText
@@ -49,14 +46,14 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            android:paddingLeft="20dp"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="10dp"
             android:drawablePadding="16dp"
             android:hint="Name"
             android:inputType="text"
             android:lineHeight="40dp"
             android:maxLines="1"
             android:text="Kelly Sikkema"
+            android:textColor="#686868"
             android:textColorHint="@color/colorTextSecondary"
             android:textSize="16sp"
             android:theme="@style/EditTextTheme" />
@@ -65,37 +62,33 @@
 
     <LinearLayout
         android:layout_width="360dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Date of birth"
-            android:textColor="#686868"
             android:textSize="16sp" />
 
-        <Button
+        <EditText
             android:id="@+id/txtDobEdit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="35dp"
-            android:background="@color/white"
-            android:drawableRight="@drawable/ic_sort_arrows_couple_pointing_up_and_down"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:text="29/04/1997"
+            android:layout_marginLeft="10dp"
+            android:drawablePadding="16dp"
+            android:hint="Day of birth"
+            android:inputType="text"
+            android:lineHeight="40dp"
+            android:maxLines="1"
+            android:text="29.04.1997"
+            android:textColor="#686868"
+            android:textColorHint="@color/colorTextSecondary"
             android:textSize="16sp"
-            android:paddingRight="17dp"
-            style="@style/NoShadowButton"
-
-            />
-
+            android:theme="@style/EditTextTheme" />
     </LinearLayout>
 
 
@@ -120,15 +113,12 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#686868"
             android:text="Phone"
             android:textSize="16sp" />
 
@@ -138,14 +128,14 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="10dp"
             android:drawablePadding="16dp"
             android:hint="Phone number"
-            android:inputType="number"
+            android:inputType="text"
             android:lineHeight="40dp"
-            android:paddingLeft="20dp"
             android:maxLines="1"
             android:text="0123 456 789"
+            android:textColor="#686868"
             android:textColorHint="@color/colorTextSecondary"
             android:textSize="16sp"
             android:theme="@style/EditTextTheme" />
@@ -155,67 +145,64 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Location"
-            android:textColor="#686868"
             android:textSize="16sp" />
 
-        <org.angmarch.views.NiceSpinner
-            android:id="@+id/spinnerLocationEdit"
+
+        <EditText
+            android:id="@+id/txtLocationEdit"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="35dp"
-            />
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:drawablePadding="16dp"
+            android:hint="Location"
+            android:inputType="text"
+            android:lineHeight="40dp"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:text="Viet Nam"
+            android:textColor="#686868"
+            android:textColorHint="@color/colorTextSecondary"
+            android:theme="@style/EditTextTheme" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="360dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Gender"
-            android:textColor="#686868"
             android:textSize="16sp" />
 
 
-        <!--<EditText-->
-            <!--android:id="@+id/txtGenderEdit"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="45dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:drawablePadding="16dp"-->
-            <!--android:hint="Gender"-->
-            <!--android:inputType="text"-->
-            <!--android:textSize="16sp"-->
-            <!--android:lineHeight="40dp"-->
-            <!--android:maxLines="1"-->
-            <!--android:text="Female"-->
-            <!--android:textColor="#686868"-->
-            <!--android:textColorHint="@color/colorTextSecondary"-->
-            <!--android:theme="@style/EditTextTheme" />-->
-
-        <org.angmarch.views.NiceSpinner
-            android:id="@+id/spinnerGenderEdit"
+        <EditText
+            android:id="@+id/txtGenderEdit"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="35dp"
-            />
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:drawablePadding="16dp"
+            android:hint="Gender"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:lineHeight="40dp"
+            android:maxLines="1"
+            android:text="Female"
+            android:textColor="#686868"
+            android:textColorHint="@color/colorTextSecondary"
+            android:theme="@style/EditTextTheme" />
     </LinearLayout>
 
     <Button

@@ -1,81 +1,62 @@
 package entity;
 
-import java.io.Serializable;
-import java.util.Objects;
+public class VoucherDTO {
+    private int id;
+    private boolean status;
+    private int point;
+    private String codeNumber;
+    private int postID;
 
-public class VoucherDTO implements Serializable {
-
-    private Long voucherID;
-
-    private String voucherNumber;
-
-    private Boolean voucherStatus;
-
-    private Long voucherPointRequired;
-
-    private PostDTO post;
-
-    public Long getVoucherID() {
-        return voucherID;
+    public int getId() {
+        return id;
     }
 
-    public void setVoucherID(Long voucherID) {
-        this.voucherID = voucherID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getVoucherNumber() {
-        return voucherNumber;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setVoucherNumber(String voucherNumber) {
-        this.voucherNumber = voucherNumber;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public Boolean isVoucherStatus() {
-        return voucherStatus;
+    public int getPoint() {
+        return point;
     }
 
-    public void setVoucherStatus(Boolean voucherStatus) {
-        this.voucherStatus = voucherStatus;
+    public void setPoint(int point) {
+        this.point = point;
     }
 
-    public Long getVoucherPointRequired() {
-        return voucherPointRequired;
+
+    public String getCodeNumber() {
+        return codeNumber;
     }
 
-    public void setVoucherPointRequired(Long voucherPointRequired) {
-        this.voucherPointRequired = voucherPointRequired;
+    public void setCodeNumber(String codeNumber) {
+        this.codeNumber = codeNumber;
     }
 
-    public PostDTO getPost() {
-        return post;
+    public int getPostID() {
+        return postID;
     }
 
-    public void setPost(PostDTO post) {
-        this.post = post;
+    public void setPostID(int postID) {
+        this.postID = postID;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        VoucherDTO that = (VoucherDTO) o;
-        return Objects.equals(voucherID, that.voucherID);
+    public VoucherDTO( ) {
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(voucherID);
-    }
+    public VoucherDTO(int id, boolean status, int point, String codeNumber, int postID) {
 
-    @Override
-    public String toString() {
-        return "VoucherDTO{" +
-                "voucherID=" + voucherID +
-                ", voucherNumber='" + voucherNumber + '\'' +
-                ", voucherStatus=" + voucherStatus +
-                ", voucherPointRequired=" + voucherPointRequired +
-                ", post=" + post +
-                '}';
+        this.id = id;
+        this.status = status;
+        this.point = point;
+        this.codeNumber = codeNumber;
+        this.postID = postID;
     }
 }

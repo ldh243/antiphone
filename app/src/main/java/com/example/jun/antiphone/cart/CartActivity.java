@@ -17,8 +17,6 @@ import com.example.jun.antiphone.R;
 import com.example.jun.antiphone.ViewPagerAdapter;
 import com.example.jun.antiphone.profile.UserProfileActivity;
 
-import java.util.Objects;
-
 
 public class CartActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -50,18 +48,16 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setIcon(R.drawable.ic_cutlery);
             TextView tabView = (TextView) LayoutInflater.from(this).inflate(R.layout.item_custom_tab_layout, null);
             tabView.setText(tabNames[i]);
-            if (i == 0) {
-                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_cutlery,0,0);
-            } else if (i == 1) {
-                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_fruit,0,0);
-            } else if (i == 2) {
-                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_clothes,0,0);
-            }
+            tabView.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_cutlery,0,0);
             tab.setCustomView(tabView);
+
+
         }
     }
 

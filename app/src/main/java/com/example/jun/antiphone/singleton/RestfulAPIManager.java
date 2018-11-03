@@ -2,6 +2,7 @@ package com.example.jun.antiphone.singleton;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,11 +16,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import entity.ActivitiesLogDTO;
-import entity.UserDTO;
+import entity.StoreDTO;
 import util.Constants;
 
 public class RestfulAPIManager {
@@ -37,23 +41,11 @@ public class RestfulAPIManager {
         return mInstance;
     }
 
-    public UserDTO getUserInformation(Context context, String user) {
-        UserDTO dto = new UserDTO();
-        dto.setFirstName("Lê Minh Dui");
-        dto.setPhone(Long.parseLong("761233666"));
-        dto.setDob("1997-04-30");
-        dto.setLocation("Wakanda");
-        dto.setGender("Female");
-        return dto;
-    }
-
-
     public void postActivityLog(Context context, final ActivitiesLogDTO activitiesLogDTO) {
         Log.d(TAG, String.format("postActivityLog: %s", activitiesLogDTO));
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         String URL = Constants.API_PATH+ "/api/activities-logs";
-
 
         JSONObject jsonRequest = new JSONObject();
         try {
@@ -104,14 +96,11 @@ public class RestfulAPIManager {
         requestQueue.add(objectRequest);
     }
 
-    public void getActivityLogNearby(Context context, String userId, String date) {
+    public void getStoresInStoreGroup(final Context context, int storeGroupID, final VolleyCallback callback) {
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
-        String URL = Constants.API_PATH + "/api/activities-logs/near-date";
-
-        URL += "?user=" + userId;
-        URL += "&date=" + date;
-
+        String URL = Constants.API_PATH+ "/api/stores/store-groups/" + storeGroupID;
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -121,16 +110,9 @@ public class RestfulAPIManager {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String json = response.toString();
-                            ObjectMapper om = new ObjectMapper();
-                            JsonNode jsonNode = om.readTree(json);
-                            int status = jsonNode.get("status").asInt();
+                            int status = response.getInt("status");
                             if (status == 200) {
-                                //success
-                                
-                            } else {
-                                // failed
-
+                                callback.onSuccess(response.getJSONArray("data"));
                             }
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -141,13 +123,12 @@ public class RestfulAPIManager {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.d(TAG, String.format("postActivityLog: onResponse: failded to| %s", error));
                     }
                 }
         );
         requestQueue.add(objectRequest);
     }
-
 
 //    public void callApi() {
 //        RequestQueue requestQueue = Volley.newRequestQueue(this);

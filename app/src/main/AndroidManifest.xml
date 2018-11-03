@@ -29,7 +29,6 @@
         <activity android:name=".login_logout.SignupActivity" />
         <activity android:name=".cart.CartActivity" />
         <activity android:name=".cart.PostDetailActivity" />
-        <activity android:name=".cart.voucherLogActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -55,6 +54,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <!-- <activity -->
         <!-- android:name=".MapsActivity" -->
         <!-- android:label="@string/title_activity_maps"> -->
@@ -67,7 +69,7 @@
         <!-- </activity> -->
         <activity android:name=".MapActivity" />
 
-        <!--notification-->
+        <!-- notification -->
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -77,6 +79,8 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_baseline_notifications_24px" />
+
+        <activity android:name=".StoreGroupLocationActivity"></activity>
     </application>
 
 </manifest>

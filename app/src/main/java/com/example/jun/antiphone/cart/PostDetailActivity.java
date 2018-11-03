@@ -6,22 +6,43 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.jun.antiphone.R;
+import com.example.jun.antiphone.StoreGroupLocationActivity;
+
 public class PostDetailActivity extends AppCompatActivity {
 
-    private final String TAG = "PERSONNALLOG";
     private TextView mTextMessage;
+    private ImageView ivLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
         configToolbar();
+
+        addControls();
+        addEvents();
+    }
+
+    private void addControls() {
+        ivLocation = findViewById(R.id.ivLocation);
+    }
+
+    private void addEvents() {
+        ivLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), StoreGroupLocationActivity.class);
+                intent.putExtra("storeGroupID", 2);
+                startActivity(intent);
+            }
+        });
     }
 
     private void configToolbar() {
@@ -33,14 +54,6 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                startActivity(new Intent(getApplicationContext(), voucherLogActivity.class));
-                return false;
             }
         });
     }

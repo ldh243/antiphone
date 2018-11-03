@@ -1,12 +1,9 @@
 package com.example.jun.antiphone.cart;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,9 +23,9 @@ public class voucherLogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voucher_log);
-        configToolbar();
+
         //get user point
-//        TextView userPoint = findViewById(R.id.userPoint);
+        TextView userPoint = findViewById(R.id.userPoint);
 
 
         //Lấy list voucher Log --> đổ vào recyclerVoucherLogAdapter
@@ -48,26 +45,5 @@ public class voucherLogActivity extends AppCompatActivity {
         rvItems1.setLayoutManager(layoutManager);
         rvItems1.setHasFixedSize(true);
         rvItems1.setAdapter(adapter);
-    }
-
-    private void configToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                startActivity(new Intent(getApplicationContext(), voucherLogActivity.class));
-                return false;
-            }
-        });
     }
 }
