@@ -13,6 +13,16 @@ public class PostDTO {
     private String toDate;
     private int totalNumber;
     private int remainNumber;
+    private String logoStore;
+    private String storeTitle;
+
+    public String getStoreTitle() {
+        return storeTitle;
+    }
+
+    public void setStoreTitle(String storeTitle) {
+        this.storeTitle = storeTitle;
+    }
 
     public int getImageDir() {
         return imageDir;
@@ -138,5 +148,13 @@ public class PostDTO {
         this.toDate = toDate;
         this.totalNumber = totalNumber;
         this.remainNumber = remainNumber;
+    }
+
+    public String getLogoStore() {
+        return logoStore;
+    }
+
+    public void setLogoStore(String logoStore) {
+        this.logoStore = logoStore;
     }
 }

@@ -2,6 +2,7 @@ package com.example.jun.antiphone;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -9,11 +10,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.jun.antiphone.cart.VoucherLogActivity;
 import com.example.jun.antiphone.singleton.RestfulAPIManager;
 import com.example.jun.antiphone.singleton.VolleyCallback;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,6 +46,7 @@ public class StoreGroupLocationActivity extends AppCompatActivity implements OnM
     private ProgressDialog myProgress;
     private ListView lvStores;
     private GoogleMap gmap;
+    private int storeGroupId;
     private List<StoreDTO> stores;
 
     private final LocationListener mLocationListener = new LocationListener() {
@@ -63,16 +68,31 @@ public class StoreGroupLocationActivity extends AppCompatActivity implements OnM
         }
     };
 
+    private void configToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbarMap);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_group_location);
-
+        configToolbar();
         myProgress = new ProgressDialog(this);
         myProgress.setTitle("Map Loading ...");
         myProgress.setMessage("Please wait...");
         myProgress.setCancelable(true);
         myProgress.show();
+
+        storeGroupId = getIntent().getIntExtra("storeGroupID", -1);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.gmap);
         mapFragment.getMapAsync(this);
@@ -98,13 +118,6 @@ public class StoreGroupLocationActivity extends AppCompatActivity implements OnM
         gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         gmap.getUiSettings().setZoomControlsEnabled(true);
 
-        gmap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-
-            @Override
-            public void onMapLoaded() {
-                myProgress.dismiss();
-            }
-        });
 
         LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -145,7 +158,7 @@ public class StoreGroupLocationActivity extends AppCompatActivity implements OnM
         final String origin = location.getLatitude() + "," + location.getLongitude();
 
 
-        api.getStoresInStoreGroup(this, 2, new VolleyCallback() {
+        api.getStoresInStoreGroup(this, storeGroupId, new VolleyCallback() {
 
             @Override
             public void onSuccess(Object response) {
@@ -187,6 +200,12 @@ public class StoreGroupLocationActivity extends AppCompatActivity implements OnM
                                     stores);
 
                             lvStores.setAdapter(arrayAdapter);
+                            myProgress.dismiss();
+                        }
+
+                        @Override
+                        public void onError(Object ex) {
+                            myProgress.dismiss();
                         }
                     });
 
@@ -194,6 +213,11 @@ public class StoreGroupLocationActivity extends AppCompatActivity implements OnM
                 } else {
                     Toast.makeText(getApplicationContext(), "No stores", Toast.LENGTH_LONG).show();
                 }
+            }
+
+            @Override
+            public void onError(Object ex) {
+                myProgress.dismiss();
             }
         });
     }

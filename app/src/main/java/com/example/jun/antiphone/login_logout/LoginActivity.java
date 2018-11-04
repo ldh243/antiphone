@@ -133,8 +133,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         firebaseAuth = FirebaseAuth.getInstance();
-//        checkRemember();
-        firebaseAuth.signOut();
+        checkRemember();
+//        firebaseAuth.signOut();
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
         btnLoginFacebook = findViewById(R.id.btnLoginFacebook);
@@ -335,18 +335,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-    public void apiRegisterWithoutPassword(String uid, String lastName, String email) {
+    public void apiRegisterWithoutPassword(String uid, String firstName, String email) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         String URL = Constants.API_PATH + "/api/users/register-without-password";
 
         Log.d(TAG, "apiRegisterWithoutPassword: " + uid);
         Log.d(TAG, "apiRegisterWithoutPassword: " + email);
-        Log.d(TAG, "apiRegisterWithoutPassword: " + lastName);
+        Log.d(TAG, "apiRegisterWithoutPassword: " + firstName);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("username", uid);
-            jsonObject.put("firstName", lastName);
+            jsonObject.put("firstName", firstName);
             jsonObject.put("email", email);
         } catch (Exception ex) {
             ex.printStackTrace();

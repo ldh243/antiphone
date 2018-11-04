@@ -34,20 +34,6 @@ public class ProfileUserDAO {
         return new Date[]{d1, d2, d3,  d4, d5, d6, d7};
     }
 
-    public DataPoint[] chartHoldingInWeek(String userId){
-
-        DataPoint [] list = new DataPoint[]{
-                new DataPoint(1, new Random().nextInt(40)),
-                new DataPoint(2, new Random().nextInt(40)),
-                new DataPoint(3, new Random().nextInt(40)),
-                new DataPoint(4, new Random().nextInt(40)),
-                new DataPoint(5, new Random().nextInt(40)),
-                new DataPoint(6, new Random().nextInt(40)),
-                new DataPoint(7, new Random().nextInt(40))
-        };
-        return list;
-    }
-
     public String [] getDayOfWeek(Date date) {
         Date[] listDate = get7DaysBefore(date);
         String [] dayOfWeek = new String[7];

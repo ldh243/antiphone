@@ -48,7 +48,7 @@
             android:inputType="text"
             android:lineHeight="40dp"
             android:maxLines="1"
-            android:text="1"
+            android:text="abc123@gmail.com"
             android:textColor="@color/colorTextPrimary"
             android:textColorHint="@color/colorTextSecondary"
             android:theme="@style/EditTextTheme" />
@@ -67,7 +67,8 @@
             android:maxLines="1"
             android:textColor="@color/colorTextPrimary"
             android:textColorHint="@color/colorTextSecondary"
-            android:theme="@style/EditTextTheme" />
+            android:theme="@style/EditTextTheme"
+            android:text="Text name"/>
 
 
         <EditText
@@ -78,13 +79,13 @@
             android:layout_marginTop="10dp"
             android:drawablePadding="16dp"
             android:hint="Password"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:lineHeight="40dp"
             android:maxLines="1"
             android:textColor="@color/colorTextPrimary"
             android:textColorHint="@color/colorTextSecondary"
             android:theme="@style/EditTextTheme"
-            android:text="1"
+            android:text="123123"
             />
 
 
@@ -96,13 +97,13 @@
             android:layout_marginTop="10dp"
             android:drawablePadding="16dp"
             android:hint="Confirm Password"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:lineHeight="40dp"
             android:maxLines="1"
             android:textColor="@color/colorTextPrimary"
             android:textColorHint="@color/colorTextSecondary"
             android:theme="@style/EditTextTheme"
-            android:text="1"
+            android:text="123123"
             />
 
         <Button

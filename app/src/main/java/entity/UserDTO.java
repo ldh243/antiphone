@@ -1,12 +1,13 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Set;
 
 /**
  * A DTO representing a user, with his authorities.
  */
-public class UserDTO {
+public class UserDTO implements Serializable {
 
     private Long id;
 
@@ -26,7 +27,7 @@ public class UserDTO {
 
     private String location;
 
-    private String gender;
+    private boolean gender;
 
     private String dob;
 
@@ -209,11 +210,11 @@ public class UserDTO {
         this.location = location;
     }
 
-    public String getGender() {
+    public boolean isGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 

@@ -32,9 +32,8 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
         android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
@@ -52,10 +51,10 @@
             android:layout_marginLeft="35dp"
             android:drawablePadding="16dp"
             android:hint="Name"
-            android:paddingLeft="10dp"
             android:inputType="text"
             android:lineHeight="40dp"
             android:maxLines="1"
+            android:paddingLeft="10dp"
             android:text="Kelly Sikkema"
             android:textColorHint="@color/colorTextSecondary"
             android:textSize="16sp"
@@ -67,9 +66,8 @@
         android:layout_width="360dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
-        android:orientation="horizontal"
         android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
@@ -81,6 +79,7 @@
 
         <Button
             android:id="@+id/txtDobEdit"
+            style="@style/NoShadowButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -88,11 +87,10 @@
             android:background="@color/white"
             android:drawableRight="@drawable/ic_sort_arrows_couple_pointing_up_and_down"
             android:gravity="center_vertical"
-            android:text="29/04/1997"
-            android:textSize="16sp"
             android:paddingLeft="10dp"
             android:paddingRight="17dp"
-            style="@style/NoShadowButton"
+            android:text="29/04/1997"
+            android:textSize="16sp"
 
             />
 
@@ -120,16 +118,15 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
         android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#686868"
             android:text="Phone"
+            android:textColor="#686868"
             android:textSize="16sp" />
 
 
@@ -143,8 +140,8 @@
             android:hint="Phone number"
             android:inputType="number"
             android:lineHeight="40dp"
-            android:paddingLeft="10dp"
             android:maxLines="1"
+            android:paddingLeft="10dp"
             android:text="0123 456 789"
             android:textColorHint="@color/colorTextSecondary"
             android:textSize="16sp"
@@ -155,8 +152,8 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
         android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
 
         >
 
@@ -172,17 +169,15 @@
             android:id="@+id/spinnerLocationEdit"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="35dp"
-            />
+            android:layout_marginLeft="35dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="360dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
-        android:orientation="horizontal"
         android:layout_marginLeft="15dp"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="100dp"
@@ -214,19 +209,35 @@
             android:id="@+id/spinnerGenderEdit"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_marginLeft="35dp"
-            />
+            android:layout_marginLeft="35dp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSaveEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_save_edit_profile"
-        android:text="SAVE"
-        android:textColor="@color/white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginRight="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <Button
+            android:id="@+id/btnLogoutEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/button_logout_edit_profile"
+            android:text="LOG OUT"
+            android:layout_marginRight="12dp"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnSaveEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/button_save_edit_profile"
+            android:text="SAVE"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

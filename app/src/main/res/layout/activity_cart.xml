@@ -22,12 +22,10 @@
             android:background="@drawable/tab_layout_underline"
             app:tabGravity="fill"
             app:tabMode="fixed"
-            android:outlineSpotShadowColor="@color/grey"
-            app:tabIndicatorColor="#ff3f69"
+            app:tabIndicatorColor="@color/colorPrimaryCyan"
             app:tabSelectedTextColor="@color/black"
             app:tabTextAppearance="@style/TabLayoutStyle"
             app:tabTextColor="@color/grey"
-
             />
 
         <android.support.v4.view.ViewPager

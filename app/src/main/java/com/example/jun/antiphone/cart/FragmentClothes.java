@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,26 +21,28 @@ import java.util.List;
 
 import entity.PostDTO;
 
-public class FragmentFood extends Fragment {
+
+public class FragmentClothes extends Fragment {
 
     View view;
-    private final String TAG = "APICART";
-    private List<PostDTO> posts = new ArrayList<>();
     private RecyclerView rvItems1;
-    private ProgressDialog myProgress;
     private RecyclerDataAdapter adapter;
-    public FragmentFood() {
+    private List<PostDTO> posts;
+    private ProgressDialog myProgress;
+
+    public FragmentClothes() {
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.list_item_recycleview, container, false);
+        posts = new ArrayList<>();
         myProgress = new ProgressDialog(getActivity());
         myProgress.setMessage("Please wait...");
         myProgress.setCancelable(true);
         myProgress.show();
-        RestfulAPIManager.getInstancẹ̣̣̣().getAllFoodPost(getActivity(), new VolleyCallback() {
+        RestfulAPIManager.getInstancẹ̣̣̣().getAllClothesPost(getActivity(), new VolleyCallback() {
             @Override
             public void onSuccess(Object response) {
                 JsonNode data = (JsonNode) response;
@@ -77,15 +78,15 @@ public class FragmentFood extends Fragment {
         });
 
         return view;
+
     }
 
     private void updateList() {
-        adapter = new RecyclerDataAdapter(view.getContext(), posts);
         rvItems1 = view.findViewById(R.id.rv_items);
+        adapter = new RecyclerDataAdapter(view.getContext(), posts);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         rvItems1.setLayoutManager(layoutManager);
         rvItems1.setHasFixedSize(true);
         rvItems1.setAdapter(adapter);
     }
-
 }

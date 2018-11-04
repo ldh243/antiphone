@@ -81,7 +81,7 @@
             android:resource="@drawable/ic_baseline_notifications_24px" />
 
         <activity android:name=".StoreGroupLocationActivity"></activity>
-        <activity android:name=".cart.voucherLogActivity"/>
+        <activity android:name=".cart.VoucherLogActivity"/>
     </application>
 
 </manifest>

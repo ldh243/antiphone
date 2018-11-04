@@ -22,6 +22,16 @@ public class StoreGroupDTO implements Serializable {
 
     private StoreTypeDTO storeType;
 
+    private String storeGroupLogo;
+
+    public String getStoreGroupLogo() {
+        return storeGroupLogo;
+    }
+
+    public void setStoreGroupLogo(String storeGroupLogo) {
+        this.storeGroupLogo = storeGroupLogo;
+    }
+
     public Long getStoreGroupID() {
         return storeGroupID;
     }

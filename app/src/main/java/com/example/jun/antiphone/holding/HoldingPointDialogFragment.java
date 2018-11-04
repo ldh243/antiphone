@@ -3,6 +3,7 @@ package com.example.jun.antiphone.holding;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,7 +58,11 @@ public class HoldingPointDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
     }
 
-
+    @Override
+    public void onResume() {
+        getDialog().getWindow().setLayout(700, 600);
+        super.onResume();
+    }
 
     @NonNull
     @Override
@@ -81,6 +86,9 @@ public class HoldingPointDialogFragment extends DialogFragment {
 
         tvTitle.setText(title);
         tvPoint.setText(String.format("%d points", point));
+        if (point == 0) {
+            tvPoint.setTextColor(Color.parseColor("#ff4d4d"));
+        }
         tvMinutes.setText(String.format("%d minutes", minutes));
 
 

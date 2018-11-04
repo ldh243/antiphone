@@ -1,7 +1,6 @@
 package com.example.jun.antiphone.cart;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -25,10 +24,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imgvProfile;
     private FloatingActionButton fabHolding;
 
-    private static String[] tabNames = {"FOOD", "DRINK", "SHOPPING"};
+    private static String[] tabNames = {"DRINK & FOOD", "ENTERTAINMENT", "SHOPPING"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState)  ;
         setContentView(R.layout.activity_cart);
 
         imgvProfile = findViewById(R.id.imgvGoToProfile_Cart);
@@ -42,19 +42,24 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new FragmentDrink(), tabNames[0]);
-        adapter.addFragment(new FragmentFood(), tabNames[1]);
-        adapter.addFragment(new FragmentFood(), tabNames[2]);
+        adapter.addFragment(new FragmentFood(), tabNames[0]);
+        adapter.addFragment(new FragmentEntertainment(), tabNames[1]);
+        adapter.addFragment(new FragmentClothes(), tabNames[2]);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setIcon(R.drawable.ic_cutlery);
             TextView tabView = (TextView) LayoutInflater.from(this).inflate(R.layout.item_custom_tab_layout, null);
             tabView.setText(tabNames[i]);
-            tabView.setCompoundDrawablesWithIntrinsicBounds(0,R.drawable.ic_cutlery,0,0);
+            if (i == 0) {
+                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_cutlery, 0, 0);
+            } else if (i == 1) {
+                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_entertainment, 0, 0);
+            } else if (i == 2) {
+                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_clothes, 0, 0);
+            }
             tab.setCustomView(tabView);
 
 
@@ -65,13 +70,13 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == imgvProfile) {
             finish();
-            Intent intent= new Intent(this, UserProfileActivity.class);
+            Intent intent = new Intent(this, UserProfileActivity.class);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             startActivity(intent);
         }
         if (v == fabHolding) {
             finish();
-            Intent intent= new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             startActivity(intent);
         }

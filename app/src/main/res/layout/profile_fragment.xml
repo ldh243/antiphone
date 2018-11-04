@@ -24,7 +24,8 @@
                 android:src="@drawable/avatar_kelly" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvNameShowProfile"
+                android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
@@ -94,7 +95,7 @@
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="240dp"
             android:layout_marginTop="35dp">
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph"

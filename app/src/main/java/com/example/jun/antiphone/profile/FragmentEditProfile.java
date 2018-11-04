@@ -2,9 +2,12 @@ package com.example.jun.antiphone.profile;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.util.Log;
@@ -17,9 +20,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.jun.antiphone.R;
+import com.example.jun.antiphone.holding.HoldingPointDialogFragment;
+import com.example.jun.antiphone.login_logout.LoginActivity;
 import com.example.jun.antiphone.singleton.RestfulAPIManager;
+import com.example.jun.antiphone.singleton.VolleyCallback;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.angmarch.views.NiceSpinner;
 
@@ -39,13 +47,17 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private EditText txtName;
     private EditText txtPhone;
-    View view;
-    Spinner spinnerGender;
-    Spinner spinnerLocation;
-    List<String> listGender;
-    List<String> listLocation;
-    UserDTO userInfo;
-    Button btnSave;
+    private View view;
+    private Spinner spinnerGender;
+    private Spinner spinnerLocation;
+    private List<String> listGender;
+    private List<String> listLocation;
+    private UserDTO userInfo;
+    private Button btnSave;
+    private ProgressDialog myProgress;
+    private TextView tvNameShowProfile;
+    private Button btnLogout;
+
     Button btnChangeDob;
     public FragmentEditProfile() {
     }
@@ -59,96 +71,48 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
     }
 
     public void getCurrentUserInformation() {
-//        UserDTO dto = new UserDTO();
-        userInfo.setFirstName("Lê Minh Dui");
-        userInfo.setPhone(Long.parseLong("761233666"));
-        userInfo.setDob("1997-04-30");
-        userInfo.setLocation("Wakanda");
-        userInfo.setGender("Female");
-//        userInfo = RestfulAPIManager.getInstancẹ̣̣̣().getUserInformation(getContext(), "");
+        myProgress = new ProgressDialog(getActivity());
+        myProgress.setMessage("Please wait...");
+        myProgress.setCancelable(true);
+        myProgress.show();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        RestfulAPIManager.getInstancẹ̣̣̣().getUserInformation(getContext(), uid, new VolleyCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                userInfo = (UserDTO) response;
+                initSpinner();
+                myProgress.dismiss();
+            }
+
+            @Override
+            public void onError(Object ex) {
+                myProgress.dismiss();
+            }
+        });
     }
 
-    @Override
-    public void onStart() {
-        getCurrentUserInformation();
-        setChangeDateListener();
-
-        txtName = getActivity().findViewById(R.id.txtNameEdit);
-        txtPhone = getActivity().findViewById(R.id.txtPhoneEdit);
-
-        spinnerGender = getActivity().findViewById(R.id.spinnerGenderEdit);
+    private void initSpinner() {
         listGender = new ArrayList<>();
         listGender.add("Male");
         listGender.add("Female");
-        listGender.add("Other");
-
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, listGender);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(dataAdapter);
 
-
-
-        spinnerLocation= getActivity().findViewById(R.id.spinnerLocationEdit);
         listLocation = new ArrayList<>();
-        listLocation.add("Vietnam");
-        listLocation.add("Uganda");
-        listLocation.add("Wakanda");
-        listLocation.add("United Kingdom");
-        listLocation.add("United State");
-        listLocation.add("Uruguay");
-        listLocation.add("Zimbabwe");
-        listLocation.add("Russia");
-        listLocation.add("Portugal");
-        listLocation.add("Paraguay");
-        listLocation.add("Panama");
-        listLocation.add("Pakistan");
-        listLocation.add("Mexico");
-        listLocation.add("Monaco");
-        listLocation.add("Singapore");
-        listLocation.add("Laos");
-        listLocation.add("India");
-        listLocation.add("China");
-        listLocation.add("Korea");
-        listLocation.add("Japan");
-        listLocation.add("Egypt");
-        listLocation.add("Cuba");
-        listLocation.add("Costa Rica");
-        listLocation.add("Colombia");
-        listLocation.add("Canada");
-        listLocation.add("Cambodia");
-        listLocation.add("Bahamas");
-        listLocation.add("Australia");
-        listLocation.add("Argentina");
-        listLocation.add("Afghanistan");
+        listLocation.add("Vietnam"); listLocation.add("Uganda"); listLocation.add("Wakanda"); listLocation.add("United Kingdom");
+        listLocation.add("United State"); listLocation.add("Uruguay"); listLocation.add("Zimbabwe"); listLocation.add("Russia");
+        listLocation.add("Portugal"); listLocation.add("Paraguay"); listLocation.add("Panama"); listLocation.add("Pakistan");
+        listLocation.add("Mexico"); listLocation.add("Monaco"); listLocation.add("Singapore"); listLocation.add("Laos");
+        listLocation.add("India"); listLocation.add("China"); listLocation.add("Korea"); listLocation.add("Japan");
+        listLocation.add("Egypt"); listLocation.add("Cuba"); listLocation.add("Costa Rica"); listLocation.add("Colombia");
+        listLocation.add("Canada"); listLocation.add("Cambodia"); listLocation.add("Bahamas"); listLocation.add("Australia");
+        listLocation.add("Argentina"); listLocation.add("Afghanistan");
         Collections.sort(listLocation);
-
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, listLocation);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLocation.setAdapter(dataAdapter2);
 
-        spinnerLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                userInfo.setLocation(String.valueOf(parent.getItemAtPosition(position)));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                userInfo.setGender(String.valueOf(parent.getItemAtPosition(position)));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         for (int i = 0; i < listLocation.size(); i++) {
             if (listLocation.get(i).equals(userInfo.getLocation())) {
@@ -157,23 +121,41 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
             }
         }
 
+        String gender = userInfo.isGender() ? "Female" : "Male";
+
         for (int i = 0; i < listGender.size(); i++) {
-            if (listGender.get(i).equals(userInfo.getGender())) {
+            if (listGender.get(i).equals(gender)) {
                 spinnerGender.setSelection(i);
                 break;
             }
         }
-
         String phone = userInfo.getPhone().toString();
-        txtPhone.setText("+84 " + phone);
+        txtPhone.setText("0" + phone);
         txtName.setText(userInfo.getFirstName());
+        tvNameShowProfile.setText(userInfo.getFirstName());
 
         btnSave = getActivity().findViewById(R.id.btnSaveEdit);
         btnSave.setOnClickListener(this);
 
+        String [] arr = userInfo.getDob().split("-");
+        String dob = arr[2] + "/" + arr[1] + "/" + arr[0];
         btnChangeDob = getActivity().findViewById(R.id.txtDobEdit);
+        btnChangeDob.setText(dob);
         btnChangeDob.setOnClickListener(this);
 
+        btnLogout = getActivity().findViewById(R.id.btnLogoutEdit);
+        btnLogout.setOnClickListener(this);
+    }
+
+    @Override
+    public void onStart() {
+        setChangeDateListener();
+        spinnerGender = getActivity().findViewById(R.id.spinnerGenderEdit);
+        spinnerLocation= getActivity().findViewById(R.id.spinnerLocationEdit);
+        getCurrentUserInformation();
+        txtName = getActivity().findViewById(R.id.txtNameEdit);
+        txtPhone = getActivity().findViewById(R.id.txtPhoneEdit);
+        tvNameShowProfile = getActivity().findViewById(R.id.tvNameShowProfile);
         super.onStart();
     }
 
@@ -186,10 +168,45 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
             case  R.id.txtDobEdit:
                 changeDate();
                 break;
+            case R.id.btnLogoutEdit:
+                confirmLogout();
+                break;
         }
     }
 
+    private void confirmLogout() {
+        DialogFragment dialogFragment = ConfirmLogoutDialogFragment.create("Log out of this account?");
+        dialogFragment.show(getActivity().getSupportFragmentManager(), TAG);
+    }
+
     private void saveEditProfile() {
+        String name = txtName.getText().toString();
+        String dob = btnChangeDob.getText().toString();
+        String [] arr = dob.split("/");
+        if (arr[0].length() == 1) {
+            arr[0] = "0" + arr[0];
+        }
+        if (arr[1].length() == 1) {
+            arr[1] = "0" + arr[1];
+        }
+
+        dob = arr[2] + "-" + arr[1] + "-" + arr[0];
+        String phone = txtPhone.getText().toString();
+        Long phoneLong = Long.parseLong(phone);
+        String location = spinnerLocation.getSelectedItem().toString();
+        String gender = spinnerGender.getSelectedItem().toString();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        UserDTO dto = new UserDTO();
+        dto.setUsername(uid);
+        dto.setFirstName(name);
+        dto.setDob(dob);
+        dto.setPhone(phoneLong);
+        dto.setLocation(location);
+        boolean isGender = gender.equals("Female") ? true : false;
+        dto.setGender(isGender);
+        RestfulAPIManager.getInstancẹ̣̣̣().saveUserInformation(getActivity(), dto);
+        DialogFragment dialogFragment = SaveSuccessDialogFragment.create("Your information has been updated");
+        dialogFragment.show(getActivity().getSupportFragmentManager(), TAG);
     }
 
     public void changeDate() {

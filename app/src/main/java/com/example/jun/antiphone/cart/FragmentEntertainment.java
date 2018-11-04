@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import java.util.List;
 
 import entity.PostDTO;
 
-public class FragmentFood extends Fragment {
+public class FragmentEntertainment extends Fragment {
 
     View view;
     private final String TAG = "APICART";
@@ -30,7 +29,7 @@ public class FragmentFood extends Fragment {
     private RecyclerView rvItems1;
     private ProgressDialog myProgress;
     private RecyclerDataAdapter adapter;
-    public FragmentFood() {
+    public FragmentEntertainment() {
     }
 
     @Nullable
@@ -41,7 +40,7 @@ public class FragmentFood extends Fragment {
         myProgress.setMessage("Please wait...");
         myProgress.setCancelable(true);
         myProgress.show();
-        RestfulAPIManager.getInstancẹ̣̣̣().getAllFoodPost(getActivity(), new VolleyCallback() {
+        RestfulAPIManager.getInstancẹ̣̣̣().getAllEntertainmentPost(getActivity(), new VolleyCallback() {
             @Override
             public void onSuccess(Object response) {
                 JsonNode data = (JsonNode) response;

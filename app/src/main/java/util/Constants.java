@@ -1,16 +1,11 @@
 package util;
 
 public class Constants {
-    public static final String API_PATH = "http://08f25495.ngrok.io";
+    public static final String API_PATH = "http://fa73416e.ngrok.io";
 
     //notification
     public static final String FIREBASE_TOPIC_NAME = "StayFocused";
-
     public static final String CHANNEL_ID = "my_channel_01";
-    public static final String CHANNEL_NAME = "Student Manger Notification";
-    public static final String CHANNEL_DESCRIPTION = "Student Manger Notification";
-
-
-
-
+    public static final String CHANNEL_NAME = "Stay Focus Notification";
+    public static final String CHANNEL_DESCRIPTION = "Stay Focus Notification";
 }

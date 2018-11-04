@@ -18,7 +18,6 @@ import entity.VoucherLogDTO;
 public class RecyclerVoucherLogAdapter extends RecyclerView.Adapter<RecyclerVoucherLogAdapter.DataViewHolder> {
 
     private List<VoucherLogDTO> voucherLogList;
-    private Context context;
 
     public RecyclerVoucherLogAdapter(List<VoucherLogDTO> listPosts) {
         this.voucherLogList = listPosts;
@@ -43,12 +42,12 @@ public class RecyclerVoucherLogAdapter extends RecyclerView.Adapter<RecyclerVouc
         dto1.setCodeNumber("BKJHFKJNKJ");
 
         PostDTO dto2 = new PostDTO();
-        dto2.setTitle("POST TITLE DEMO");
+        dto2.setTitle("Passio");
         //
 
         holder.date.setText(dto.getDate());
-        holder.postTitle.setText("" + dto2.getTitle());
-        holder.voucherNumber.setText("" + dto1.getCodeNumber());
+        holder.postTitle.setText(dto2.getTitle());
+        holder.voucherNumber.setText(dto1.getCodeNumber());
 
         //Khi click -> show detail nếu muốn
 //        holder.setItemClickListener(new ItemClickListener() {

@@ -20,12 +20,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jun.antiphone.R;
+import com.example.jun.antiphone.singleton.RestfulAPIManager;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import org.json.JSONObject;
 
@@ -39,7 +42,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     EditText edtEmail;
     EditText edtPassword;
     EditText edtConfirmPassword;
-    EditText edttName;
+    EditText edtName;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private String TAG = "PERSONALLOG";
@@ -60,7 +63,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         edtEmail = findViewById(R.id.edtEmailSignup);
         edtPassword = findViewById(R.id.edtPasswordSignup);
         edtConfirmPassword = findViewById(R.id.edtPasswordConfirmSignup);
-        edttName = findViewById(R.id.edtEmailSignup);
+        edtName = findViewById(R.id.edtNameSignup);
     }
 
 
@@ -80,7 +83,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         final String email = edtEmail.getText().toString().trim();
         String password = edtPassword.getText().toString();
         String passwordConfirm = edtConfirmPassword.getText().toString();
-        final String name = edttName.getText().toString();
+        final String name = edtName.getText().toString();
 
         Log.d(TAG, "registerUser: " + email);
         Log.d(TAG, "registerUser: " + password);
@@ -110,65 +113,44 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
+
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName("Jane Q. User")
+                                    .build();
+                            firebaseUser.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                            }
+                                        }
+                                    });
+
+
+                            Log.d("RESTFUL", "onComplete: " + name);
+                            Log.d("RESTFUL", "onComplete: " + firebaseUser.getDisplayName());
                             UserDTO dto = new UserDTO();
-                            dto.setEmail(task.getResult().getUser().getEmail());
-                            dto.setFirstName(task.getResult().getUser().getDisplayName());
-                            dto.setUsername(task.getResult().getUser().getUid());
+                            dto.setEmail(firebaseUser.getEmail());
+                            dto.setFirstName(firebaseUser.getDisplayName());
+                            dto.setUsername(firebaseUser.getUid());
                             Toast.makeText(SignupActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                            RestfulAPIManager.getInstancẹ̣̣̣().apiRegisterWithoutPassword(getApplicationContext(), firebaseUser.getUid()
+                                    , name, firebaseUser.getEmail());
+                            progressDialog.dismiss();
                             finish();
                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                         } else {
                             Log.d(TAG, "onComplete: " + task.getException());
                             Toast.makeText(SignupActivity.this, task.getException().toString().split(":")[1].trim(), Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
                     }
 
                 });
-    }
-    public void apiRegisterWithoutPassword(UserDTO dto) {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        String URL = Constants.API_PATH + "/api/users/register-without-password";
-
-        Log.d(TAG, "apiRegisterWithoutPassword: " + dto.getUsername());
-        Log.d(TAG, "apiRegisterWithoutPassword: " + dto.getEmail());
-        Log.d(TAG, "apiRegisterWithoutPassword: " + dto.getFirstName());
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("username", dto.getUsername());
-            jsonObject.put("firstName", dto.getFirstName());
-            jsonObject.put("email", dto.getEmail());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                URL,
-                jsonObject,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String json = response.toString();
-                            Log.d(TAG, "onResponse: " + json);
-                            ObjectMapper om = new ObjectMapper();
-                            JsonNode jsonNode = om.readTree(json);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                            Log.d(TAG, "onResponse: " + ex.getMessage());
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "onErrorResponse: " + error.toString());
-                    }
-                }
-        );
-        requestQueue.add(objectRequest);
     }
 }

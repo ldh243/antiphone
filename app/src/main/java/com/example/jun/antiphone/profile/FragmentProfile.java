@@ -2,6 +2,7 @@ package com.example.jun.antiphone.profile;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,6 +27,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jun.antiphone.R;
+import com.example.jun.antiphone.singleton.RestfulAPIManager;
+import com.example.jun.antiphone.singleton.VolleyCallback;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -38,6 +42,8 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import model.ProfileUserDAO;
 import util.Constants;
@@ -53,7 +59,8 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     private TextView txtPointEarned;
     private TextView txtPointSpent;
     private TextView txtTotalTimeHolding;
-
+    private List<Integer> dataChart;
+    private ProgressDialog myProgress;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     public FragmentProfile() {
@@ -69,7 +76,9 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("PERSONALLOG", "onStart: ");
+        myProgress = new ProgressDialog(getActivity());
+        myProgress.setMessage("Please wait...");
+        myProgress.show();
         setCurrentDate();
         String currentSelectedDate = currentDay + "/" + currentMonth + "/" + currentYear;
         setChangeDateListener();
@@ -80,8 +89,9 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
         txtPointEarned = getActivity().findViewById(R.id.txtPointsEarned);
         txtPointSpent = getActivity().findViewById(R.id.txtPointsSpent);
         txtTotalTimeHolding = getActivity().findViewById(R.id.txtTotalTime);
-        getTotalPointEarned();
-        getTotalPointSpent();
+//        getTotalPointEarned();
+//        getTotalPointSpent();
+        getTotalPointRemain();
         getTotalTimeHolding();
     }
 
@@ -108,7 +118,27 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
         graph.getGridLabelRenderer().setPadding(40);
     }
 
-    private void drawChart(String dateString) {
+    private void drawChart(final String dateString) {
+        String[] arr = dateString.split("/");
+        String dateFormatStr = arr[2] + "-" + arr[1] + "-" + arr[0];
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        RestfulAPIManager.getInstancẹ̣̣̣().getActivityLogNearby(getActivity(), uid, dateFormatStr, new VolleyCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                dataChart = (List<Integer>) response;
+                finishChart(dateString, dataChart);
+                myProgress.dismiss();
+
+            }
+
+            @Override
+            public void onError(Object ex) {
+                myProgress.dismiss();
+            }
+        });
+    }
+
+    private void finishChart(String dateString, List<Integer> dataChart) {
         ProfileUserDAO dao = new ProfileUserDAO();
         Date date = null;
         try {
@@ -122,20 +152,35 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
                 + listDay[0].toString().split(" ")[1] + " - "
                 + listDay[6].toString().split(" ")[2] + ". "
                 + listDay[6].toString().split(" ")[1];
-
         graph.setTitle(title);
         graph.setTitleColor(Color.BLACK);
-        DataPoint[] list = dao.chartHoldingInWeek("123");
         String[] dayOfWeek = dao.getDayOfWeek(date);
+        DataPoint[] list = new DataPoint[]{
+                new DataPoint(1, dataChart.get(0)),
+                new DataPoint(2, dataChart.get(1)),
+                new DataPoint(3, dataChart.get(2)),
+                new DataPoint(4, dataChart.get(3)),
+                new DataPoint(5, dataChart.get(4)),
+                new DataPoint(6, dataChart.get(5)),
+                new DataPoint(7, dataChart.get(6))
+        };
+
         series = new LineGraphSeries<>(list);
         graph.removeAllSeries();
         graph.addSeries(series);
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setMaxX(7);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScrollable(true);
         StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
         staticLabelsFormatter.setHorizontalLabels(dayOfWeek);
         graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
         graph.getGridLabelRenderer().setHorizontalAxisTitleTextSize(11);
+
+
     }
 
     private void setTotalTimeHolding() {
@@ -146,7 +191,6 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     }
 
     public void changeDate() {
-        Log.d("PERSONALLOG", "changeDate: ");
         DatePickerDialog dialog = new DatePickerDialog(
                 getActivity(),
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT,
@@ -160,7 +204,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
-                String date = day + "/" +  month + "/" + year;
+                String date = day + "/" + month + "/" + year;
                 currentYear = year;
                 currentMonth = month;
                 currentDay = day;
@@ -171,7 +215,6 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.d("PERSONALLOG", "onClick: " + v.getId());
         switch (v.getId()) {
             case R.id.iconChangeDate:
                 changeDate();
@@ -195,16 +238,11 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-//                            String json = response.toString();
-//                            ObjectMapper om = new ObjectMapper();
-//                            JsonNode jsonNode = om.readTree(json);
-//                            Log.d(TAG, "onResponse: " + jsonNode.get("rows").get(0).get("elements").get(0).get("distance").get("text"));
-//                            String distance = jsonNode.get("rows").get("elements").get("distance").get("text").asText();
-//                            Log.d(TAG, "onResponseeeeeeeeeeeeeeeee: " + distance);
                             String pointEarned = response.get("data").toString();
 
                             Double totalTime = Double.parseDouble(pointEarned);
                             txtTotalTimeHolding.setText(DateTimeUtils.generateDayHourMinutes(totalTime));
+                            myProgress.dismiss();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
@@ -213,6 +251,7 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        myProgress.dismiss();
                     }
                 }
         );
@@ -220,75 +259,63 @@ public class FragmentProfile extends Fragment implements View.OnClickListener {
     }
 
     public void getTotalPointSpent() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         String uid = firebaseAuth.getCurrentUser().getUid();
+        RestfulAPIManager.getInstancẹ̣̣̣().getTotalPointSpent(getContext(), uid, new VolleyCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                JsonNode data = (JsonNode) response;
+                String totalPointSpent = data.asText();
+                txtPointSpent.setText(totalPointSpent);
+                myProgress.dismiss();
+            }
 
-        String URL = Constants.API_PATH + "/api/point-logs/users/total-point";
-        URL += "/" + uid;
+            @Override
+            public void onError(Object ex) {
+                myProgress.dismiss();
 
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                URL,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String pointEarned = response.get("data").toString();
-                            txtPointSpent.setText(pointEarned);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }
-        );
-        requestQueue.add(objectRequest);
+            }
+        });
     }
 
     public void getTotalPointEarned() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         String uid = firebaseAuth.getCurrentUser().getUid();
+        RestfulAPIManager.getInstancẹ̣̣̣().getTotalPointEarned(getContext(), uid, new VolleyCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                JsonNode data = (JsonNode) response;
+                String totalPointEarned = data.asText();
+                txtPointEarned.setText(totalPointEarned);
+                myProgress.dismiss();
+            }
 
-        String URL = Constants.API_PATH + "/api/activities-logs/users/total-point";
-        URL += "/" + uid;
+            @Override
+            public void onError(Object ex) {
+                myProgress.dismiss();
+            }
+        });
+    }
 
-        JsonObjectRequest objectRequest = new JsonObjectRequest(
-                Request.Method.GET,
-                URL,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-//                            String json = response.toString();
-//                            ObjectMapper om = new ObjectMapper();
-//                            JsonNode jsonNode = om.readTree(json);
-//                            Log.d(TAG, "onResponse: " + jsonNode.get("rows").get(0).get("elements").get(0).get("distance").get("text"));
-//                            String distance = jsonNode.get("rows").get("elements").get("distance").get("text").asText();
-//                            Log.d(TAG, "onResponseeeeeeeeeeeeeeeee: " + distance);
-                            String pointEarned = response.get("data").toString();
-                            txtPointEarned.setText(pointEarned);
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }
-        );
-        requestQueue.add(objectRequest);
+    public void getTotalPointRemain() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getCurrentUser().getUid();
+        RestfulAPIManager.getInstancẹ̣̣̣().getTotalPointRemain(getContext(), uid, new VolleyCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                JsonNode data = (JsonNode) response;
+                String totalPointEarned = data.get("earn").asText();
+                String totalPointSpent = data.get("used").asText();
+                txtPointEarned.setText(totalPointEarned);
+                txtPointSpent.setText(totalPointSpent);
+                myProgress.dismiss();
+            }
+
+            @Override
+            public void onError(Object ex) {
+                myProgress.dismiss();
+            }
+        });
     }
     //    public void callApi() {
 //        RequestQueue requestQueue = Volley.newRequestQueue(this);

@@ -31,7 +31,7 @@ public class HoldingActivity extends AppCompatActivity {
 
     //20 minutes is 1200 seconds
     private static final int MAX_TIME = 1200;
-    private static final int STEP_TIME = 1; //sleep 0.1s
+    private static final double STEP_TIME = 60; //sleep 0.1s
     CircularProgressIndicator circularProgress;
     BroadcastReceiver screenOnOffReceiver;
     long currentProgress;
@@ -121,7 +121,7 @@ public class HoldingActivity extends AppCompatActivity {
                                 EventBus.getDefault().post(new ChangeUIEvent(currentProgress, point));
                             }
                             try {
-                                Thread.sleep(100);
+                                Thread.sleep(1000);
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }

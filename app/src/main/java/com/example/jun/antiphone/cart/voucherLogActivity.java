@@ -1,9 +1,12 @@
 package com.example.jun.antiphone.cart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import entity.VoucherLogDTO;
 
-public class voucherLogActivity extends AppCompatActivity {
+public class VoucherLogActivity extends AppCompatActivity {
 
     View view;
     private List<VoucherLogDTO> posts = new ArrayList<>();
@@ -45,5 +48,19 @@ public class voucherLogActivity extends AppCompatActivity {
         rvItems1.setLayoutManager(layoutManager);
         rvItems1.setHasFixedSize(true);
         rvItems1.setAdapter(adapter);
+        configToolbar();
+    }
+
+    private void configToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbarCart);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
