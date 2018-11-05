@@ -27,6 +27,7 @@ public class ConfirmGetVoucherDialogFragment extends DialogFragment {
     private String uid;
     private int postId;
     private TextView tvTotalPointsRemainPostDetail;
+
     public static ConfirmGetVoucherDialogFragment create(String title, String uid, int postId, TextView tvTotalPointsRemainPostDetail) {
         ConfirmGetVoucherDialogFragment saveSuccessDialogFragment = new ConfirmGetVoucherDialogFragment();
         saveSuccessDialogFragment.setTitle(title);
@@ -91,9 +92,7 @@ public class ConfirmGetVoucherDialogFragment extends DialogFragment {
                 .setPositiveButton("YES",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-//                                RestfulAPIManager.getInstancẹ̣̣̣().getVoucherByPostIdUsername(getContext(), uid, postId);
-
-                                RestfulAPIManager.getInstancẹ̣̣̣().getTotalPointRemain(getContext(), uid, new VolleyCallback() {
+                                RestfulAPIManager.getInstancẹ̣̣̣().getVoucherByPostIdUsername(getContext(), uid, postId, new VolleyCallback() {
                                     @Override
                                     public void onSuccess(Object response) {
                                         JsonNode data = (JsonNode) response;
@@ -106,6 +105,7 @@ public class ConfirmGetVoucherDialogFragment extends DialogFragment {
 
                                     }
                                 });
+
 
                                 dialog.dismiss();
 

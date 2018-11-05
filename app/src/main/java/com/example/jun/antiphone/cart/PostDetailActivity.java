@@ -115,7 +115,7 @@ public class PostDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogFragment dialogFragment = ConfirmGetVoucherDialogFragment.create("This voucher will expire in 6 hours." +
-                        " Are you sure to spent 10 points to get this voucher?", uid, postId, tvTotalPointsRemainPostDetail);
+                        " Are you sure to spend 10 points to get this voucher?", uid, postId, tvTotalPointsRemainPostDetail);
                 dialogFragment.show(getSupportFragmentManager(), TAG);
                 Log.d("GETVOUCHER", "onClick: GET VOUCHER");
             }

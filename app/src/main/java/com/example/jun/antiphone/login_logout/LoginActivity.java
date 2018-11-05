@@ -133,8 +133,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         firebaseAuth = FirebaseAuth.getInstance();
-        checkRemember();
-//        firebaseAuth.signOut();
+//        checkRemember();
+        firebaseAuth.signOut();
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
         btnLoginFacebook = findViewById(R.id.btnLoginFacebook);

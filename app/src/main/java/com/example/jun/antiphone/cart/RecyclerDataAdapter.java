@@ -42,9 +42,13 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
         Picasso.with(context).load(dto.getBanner()).error(R.drawable.image_not_available).into(holder.post_image);
         Picasso.with(context).load(dto.getLogoStore()).error(R.drawable.image_not_available).into(holder.logoPostCartScreen);
         holder.discountRateCartScreen.setText("-" + dto.getDiscountRate() + "%");
-        String date = dto.getStartDate() + " - " + dto.getToDate();
+
+        String [] startDate = dto.getStartDate().split("-");
+        String [] endDate = dto.getToDate().split("-");
+        String date = startDate[2] + "/" + startDate[1] + "/" + startDate[0] + " - ";
+        date += endDate[2] + "/" + endDate[1] + "/" + endDate[0];
         holder.tvDateCartScreen.setText(date);
-        holder.tvDescriptionCartScreen.setText(dto.getPostID() + " " + dto.getDescription());
+        holder.tvDescriptionCartScreen.setText(dto.getDescription());
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {

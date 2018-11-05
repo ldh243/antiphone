@@ -631,7 +631,6 @@ public class RestfulAPIManager {
                                 callback.onSuccess(jsonNode.get("data"));
                             } else {
                                 // failed
-
                             }
                         } catch (Exception ex) {
                             ex.printStackTrace();
@@ -648,7 +647,7 @@ public class RestfulAPIManager {
         requestQueue.add(objectRequest);
     }
 
-    public void getVoucherByPostIdUsername(Context context, String uid, int postId) {
+    public void getVoucherByPostIdUsername(Context context, String uid, int postId, final VolleyCallback callback) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         String URL = Constants.API_PATH + "/api/vouchers/get-voucher-number/";
@@ -668,7 +667,7 @@ public class RestfulAPIManager {
                             JsonNode jsonNode = om.readTree(json);
                             int status = jsonNode.get("status").asInt();
                             if (status == 200) {
-                                //success
+                                callback.onSuccess(jsonNode.get("data"));
                             } else {
                                 // failed
                             }
