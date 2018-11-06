@@ -54,24 +54,22 @@
             app:fabCustomSize="67dp"
             app:layout_anchor="@id/btnAppBarProfile"
             app:maxImageSize="33dp" />
-
         <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/ic_person_black_24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="bottom|left"
             android:layout_marginLeft="40dp"
-            android:layout_marginBottom="15dp"
-
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ic_man_disable"
             />
         <ImageView
             android:id="@+id/imgvGoToCart_Profile"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="bottom|right"
             android:layout_marginRight="40dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/ic_shopping_basket_grey_24dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ic_tag"
             />
 
     </android.support.design.widget.CoordinatorLayout>

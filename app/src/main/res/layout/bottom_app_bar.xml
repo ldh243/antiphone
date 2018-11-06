@@ -20,84 +20,10 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/smiling_face"
+            android:src="@drawable/ic_happy"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"/>
-        <!--<LinearLayout-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:gravity="center"-->
-            <!--&gt;-->
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/ic_check_black_24dp"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Reduce your phone usage"-->
-                <!--android:textSize="22sp"-->
-                <!--android:layout_marginLeft="10dp"/>-->
-        <!--</LinearLayout>-->
-        <!--<LinearLayout-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--&gt;-->
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/ic_check_black_24dp"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Get thing done"-->
-                <!--android:textSize="22sp"-->
-                <!--android:layout_marginLeft="10dp"/>-->
-        <!--</LinearLayout>-->
-        <!--<LinearLayout-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--&gt;-->
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:src="@drawable/ic_check_black_24dp"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Stay motivated"-->
-                <!--android:textSize="22sp"-->
-                <!--android:layout_marginLeft="10dp"/>-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="300dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:gravity="center"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--&gt;-->
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="AND EARN REWARD POINTS FOR SHOPPING"-->
-                <!--android:textSize="22sp"-->
-                <!--android:gravity="center"-->
-                <!--android:layout_marginLeft="10dp"/>-->
-        <!--</LinearLayout>-->
-
     </LinearLayout>
-
 
     <android.support.design.bottomappbar.BottomAppBar
         android:id="@+id/btnAppBar"
@@ -108,10 +34,6 @@
         android:paddingTop="7dp"
         android:background="@drawable/background_holding"
         >
-
-
-        <!--app:navigationIcon="@drawable/ic_menu_black_24dp"-->
-
     </android.support.design.bottomappbar.BottomAppBar>
 
     <android.support.design.widget.FloatingActionButton
@@ -128,21 +50,21 @@
         app:maxImageSize="33dp" />
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="bottom|left"
         android:layout_marginLeft="40dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/ic_person_grey_24dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ic_man"
         android:onClick="goToProfile" />
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="bottom|right"
         android:layout_marginRight="40dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/ic_shopping_basket_grey_24dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/ic_tag"
         android:onClick="goToCart" />
 
 </android.support.design.widget.CoordinatorLayout>

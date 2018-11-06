@@ -21,18 +21,19 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ImageView imgvProfile;
+    private ImageView ivProfile;
     private FloatingActionButton fabHolding;
-
-    private static String[] tabNames = {"DRINK & FOOD", "ENTERTAINMENT", "SHOPPING"};
+    private int[] iconTabLayout = new int[]{R.drawable.ic_diet_disable, R.drawable.ic_video_camera_disable, R.drawable.ic_waistcoat_disable};
+    private int[] iconTabLayoutSelected = new int[]{R.drawable.ic_diet, R.drawable.ic_video_camera, R.drawable.ic_waistcoat};
+    private static String[] tabNames = {"Drink & Food", "Entertainment", "Clothes"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState)  ;
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        imgvProfile = findViewById(R.id.imgvGoToProfile_Cart);
-        imgvProfile.setOnClickListener(this);
+        ivProfile = findViewById(R.id.imgvGoToProfile_Cart);
+        ivProfile.setOnClickListener(this);
 
         fabHolding = findViewById(R.id.fapCart);
         fabHolding.setOnClickListener(this);
@@ -42,33 +43,52 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new FragmentFood(), tabNames[0]);
-        adapter.addFragment(new FragmentEntertainment(), tabNames[1]);
-        adapter.addFragment(new FragmentClothes(), tabNames[2]);
+        adapter.addFragment(new FragmentFood(), null);
+        adapter.addFragment(new FragmentEntertainment(), null);
+        adapter.addFragment(new FragmentClothes(), null);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            TextView tabView = (TextView) LayoutInflater.from(this).inflate(R.layout.item_custom_tab_layout, null);
-            tabView.setText(tabNames[i]);
-            if (i == 0) {
-                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_cutlery, 0, 0);
-            } else if (i == 1) {
-                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_entertainment, 0, 0);
-            } else if (i == 2) {
-                tabView.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_clothes, 0, 0);
-            }
-            tab.setCustomView(tabView);
-
-
+            tab.setIcon(iconTabLayout[i]);
+//            TextView tabView = (TextView) LayoutInflater.from(this).inflate(R.layout.item_custom_tab_layout, null);
+//            tabView.setText(tabNames[i]);
+//            tabView.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, iconTabLayout[i]);
+//            tabView.setCompoundDrawablesWithIntrinsicBounds(0, iconTabLayout[i], 0, 0);
+//            tab.setCustomView(tabView);
         }
+        int position = tabLayout.getSelectedTabPosition();
+        TabLayout.Tab tab = tabLayout.getTabAt(position);
+        tab.setIcon(iconTabLayoutSelected[position]);
+        tab.setText(tabNames[position]);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.setIcon(iconTabLayoutSelected[tab.getPosition()]);
+                tab.setText(tabNames[tab.getPosition()]);
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.setIcon(iconTabLayout[tab.getPosition()]);
+                tab.setText(null);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
     }
 
     @Override
     public void onClick(View v) {
-        if (v == imgvProfile) {
+        if (v == ivProfile) {
             finish();
             Intent intent = new Intent(this, UserProfileActivity.class);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

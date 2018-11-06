@@ -76,6 +76,7 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
         myProgress.setCancelable(true);
         myProgress.show();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        initEvent();
         RestfulAPIManager.getInstancẹ̣̣̣().getUserInformation(getContext(), uid, new VolleyCallback() {
             @Override
             public void onSuccess(Object response) {
@@ -91,6 +92,14 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
         });
     }
 
+    private void initEvent() {
+        btnSave = getActivity().findViewById(R.id.btnSaveEdit);
+        btnSave.setOnClickListener(this);
+        btnChangeDob = getActivity().findViewById(R.id.txtDobEdit);
+        btnChangeDob.setOnClickListener(this);
+        btnLogout = getActivity().findViewById(R.id.btnLogoutEdit);
+        btnLogout.setOnClickListener(this);
+    }
     private void initSpinner() {
         listGender = new ArrayList<>();
         listGender.add("Male");
@@ -134,17 +143,13 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
         txtName.setText(userInfo.getFirstName());
         tvNameShowProfile.setText(userInfo.getFirstName());
 
-        btnSave = getActivity().findViewById(R.id.btnSaveEdit);
-        btnSave.setOnClickListener(this);
+
 
         String [] arr = userInfo.getDob().split("-");
         String dob = arr[2] + "/" + arr[1] + "/" + arr[0];
-        btnChangeDob = getActivity().findViewById(R.id.txtDobEdit);
         btnChangeDob.setText(dob);
-        btnChangeDob.setOnClickListener(this);
 
-        btnLogout = getActivity().findViewById(R.id.btnLogoutEdit);
-        btnLogout.setOnClickListener(this);
+
     }
 
     @Override
@@ -180,6 +185,8 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
     }
 
     private void saveEditProfile() {
+        Log.d(TAG, "saveEditProfile: ");
+
         String name = txtName.getText().toString();
         String dob = btnChangeDob.getText().toString();
         String [] arr = dob.split("/");
