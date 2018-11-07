@@ -21,4 +21,26 @@
         android:textAlignment="center"
         android:layout_marginTop="15dp"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:gravity="right">
+        <Button
+            android:id="@+id/btnYesGetVoucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:textColor="#4CAF50"
+            android:text="YES"/>
+        <Button
+            android:id="@+id/btnNoGetVoucher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NO"
+            android:textColor="#EF5350"
+            android:background="#00000000"
+            />
+    </LinearLayout>
 </LinearLayout>

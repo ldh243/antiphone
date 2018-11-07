@@ -52,14 +52,7 @@ public class SaveSuccessDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setNegativeButton("OK!",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                dialog.dismiss();
-                            }
-                        }
-                );
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View v = LayoutInflater.from(this.getContext()).inflate(R.layout.fragment_dialog_save_profile_success, null, false);
         TextView tvTitle = v.findViewById(R.id.tvTitle);
         tvTitle.setText(title);

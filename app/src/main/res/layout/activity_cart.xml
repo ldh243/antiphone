@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_cart"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFF"
@@ -25,7 +26,6 @@
             app:tabTextAppearance="@style/TabLayoutStyle"
             app:tabTextColor="@color/grey"
             />
-
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPagerCart"
             android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.jun.antiphone.R;
@@ -20,6 +21,8 @@ import com.example.jun.antiphone.singleton.RestfulAPIManager;
 import com.example.jun.antiphone.singleton.VolleyCallback;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.firebase.auth.FirebaseAuth;
+
+import util.Constants;
 
 public class ConfirmGetVoucherDialogFragment extends DialogFragment {
 
@@ -88,7 +91,8 @@ public class ConfirmGetVoucherDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+        AlertDialog.Builder builder = null;
+        builder = new AlertDialog.Builder(getActivity())
                 .setPositiveButton("YES",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
@@ -105,8 +109,6 @@ public class ConfirmGetVoucherDialogFragment extends DialogFragment {
 
                                     }
                                 });
-
-
                                 dialog.dismiss();
 
                             }
@@ -122,7 +124,6 @@ public class ConfirmGetVoucherDialogFragment extends DialogFragment {
         tvTitle.setText(title);
         builder.setView(v);
         return builder.create();
-
     }
 
     @Override
